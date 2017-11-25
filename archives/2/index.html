@@ -91,7 +91,7 @@
                     <div class="site-heading">
                         <h1>Wan Blog</h1>
                         <!--<hr class="small">-->
-                        <span class="subheading">JavaScript/Java/Srping Blog</span>
+                        <span class="subheading">JavaScript/Java/Srping 개발 Blog</span>
                     </div>
                 
 
@@ -214,38 +214,6 @@
 
 <div class="post-preview">
 
-    <a href="/2017/04/22/2017-04-22-spring-security-implement/">
-        <h2 class="post-title">
-            Spring Security 구현
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            개요
-로그인 처리를 구현하는데는 두개의 인터페이스가 존재한다 UserDetailsService와 AuthencationProvider가 존재한다. 두개의 인터페이스를 구현하면 security로그인 부분에서 데이터베이스의 유저정보를 불러어오는부분과, 비밀번호 대조하는 부분을 직접구현할 수 있다.
-UserDetailsService : 유저정보를 디비에서 ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Wan on
-            2017-04-22
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Spring" title="Spring">Spring</a>
-            
-              <a href="/tags/#Security" title="Security">Security</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
     <a href="/2017/04/20/2017-04-20-Tomcat-Session-principle /">
         <h2 class="post-title">
             톰켓 세션 동작원리
@@ -254,7 +222,8 @@ UserDetailsService : 유저정보를 디비에서 ......
             
         </h3>
         <div class="post-content-preview">
-            Cookie
+            톰켓 세션 동작원리
+Cookie
 
 사용자 하드웨어에 저장되는 텍스트이다.
 클라이언트가 웹서버에 접근하면 요청한 response로 웹페이지를 전송하면서 쿠키정보도 보내줌.
@@ -263,7 +232,7 @@ UserDetailsService : 유저정보를 디비에서 ......
 
 HTTP프로토콜은 비접속형 프로토콜, 매 접속마다 새로운 네트웤 연결이 이루어진다. 그래서 서버는 클라이언트의 이전 상태를 기억하기위해 세션이라는 개념을 사용한다.
 
-웹 어플리케이션에서 개발할때......
+웹 어플......
         </div>
     </a>
     
@@ -295,10 +264,11 @@ HTTP프로토콜은 비접속형 프로토콜, 매 접속마다 새로운 네트
             
         </h3>
         <div class="post-content-preview">
-            개요
+            Datasource, JdbcTemplate란
+개요
 DataSource, jdbcTemplate이 무엇인지 알아보고 이것을 이용한 불필요한 생성등을 없애고 데이터베이스 연결하기
 일반적인 JDBC을 이용한 DB연결
-123456789101112131415161718192021222324252627282930public class jdbcTest &#123;	public static void main(......
+123456789101112131415161718192021222324252627282930public class jdbcTest &#123......
         </div>
     </a>
     
@@ -328,14 +298,49 @@ DataSource, jdbcTemplate이 무엇인지 알아보고 이것을 이용한 불필
             
         </h3>
         <div class="post-content-preview">
-            개요
-단순히 Spring-security을 이용해 DaoAuthenticationProvider와 UserDetailsService을 이용해 인증기능(로그인기능)을 구현하게되면 한가지 문제점이 존재한다. 보안사고가 발생할경우 비밀번호가 평문으로 되어있다는것이다. Spring에서는 plaintext, sha, sha256, md4, md5의 암호화 기능......
+            Spring Security 암호화
+개요
+단순히 Spring-security을 이용해 DaoAuthenticationProvider와 UserDetailsService을 이용해 인증기능(로그인기능)을 구현하게되면 한가지 문제점이 존재한다. 보안사고가 발생할경우 비밀번호가 평문으로 되어있다는것이다. Spring에서는 plaintext, sha, sha2......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Wan on
             2017-03-26
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#security" title="security">security</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/03/25/2017-03-25-spring-security-theory/">
+        <h2 class="post-title">
+            Spring-security-구조
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Spring Security 구조
+먼저 Spring Security에서 유저 인증을 구현할 때 최상위 인터페이스로는 아래 그림 같이 Authentication Manager Interface가 존재한다. 그리고 authenticationManager Interface를 통해 유저 인증 구현 한다.
+
+[이미지 1]
+위 그림과 같이 authenticati......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2017-03-25
         </p>
         <div class="tags">
             
@@ -539,10 +544,6 @@ I publish the whole project f......
     <ul>
       
         <li>
-          <a href="/2017/11/25/2017-03-25-spring-security-theory/">Spring-security</a>
-        </li>
-      
-        <li>
           <a href="/2017/10/29/2017-10-29-Spring-Transaction,AspectJ-Compile/">AspectJ를 사용해서 같은 클래스내에도 새로운 트랜잭션 만들기</a>
         </li>
       
@@ -556,6 +557,10 @@ I publish the whole project f......
       
         <li>
           <a href="/2017/10/07/2017-10-07-spring-Transaction,Exception/">Spring에서 Exception 발생시 Trasaction 처리 주의</a>
+        </li>
+      
+        <li>
+          <a href="/2017/08/06/2017-08-06-spring-remember-me/">Spring-RememberMe</a>
         </li>
       
     </ul>

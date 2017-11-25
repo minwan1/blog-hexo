@@ -15,11 +15,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Spring-security - WanBlog | 개발블로그
+          Spring-security-구조 - WanBlog | 개발블로그
         
     </title>
 
-    <link rel="canonical" href="https://minwan1.github.io/2017/11/25/2017-03-25-spring-security-theory/">
+    <link rel="canonical" href="https://minwan1.github.io/2017/03/25/2017-03-25-spring-security-theory/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -96,11 +96,11 @@
                               <a class="tag" href="/tags/#security" title="security">security</a>
                             
                         </div>
-                        <h1>Spring-security</h1>
+                        <h1>Spring-security-구조</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Wan on
-                            2017-11-25
+                            2017-03-25
                         </span>
                     </div>
                 
@@ -217,28 +217,22 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p><img src="http://i.imgur.com/m5dfYew.png" alt=""><br>
-<strong><em><center>[이미지 1]</center></em></strong></p>
+                <h2><span id="spring-security-구조">Spring Security 구조</span></h2>
+<p>먼저 Spring Security에서 유저 인증을 구현할 때 최상위 인터페이스로는 아래 그림 같이 Authentication Manager Interface가 존재한다. 그리고 <strong><em>authenticationManager</em></strong> Interface를 통해 유저 인증 구현 한다.<br>
+<img src="http://i.imgur.com/m5dfYew.png" alt=""><br>
+<strong><em><center>[이미지 1]</center></em></strong><br>
+위 그림과 같이 <strong><em>authenticationManager</em></strong> 의 구현체로 <strong><em>ProviderManager</em></strong> 가 존재한다. <strong><em>ProviderManager</em></strong> 는 인증구현을 <strong><em>AuthenticationProvider Interface</em></strong> 에게 위임한다. 일반적으로 <strong><em>AuthenticationProvider</em></strong> 을 커스터마이징해서 인증을 구현한다. <strong><em>AuthenticationProvider</em></strong> 구현체는 3개가 있고, 이것에 인증에 성공하지 못할경우 예외처리가 발생한다. 구현체로 <strong><em>DaoAuthenticationProvider, LadpAuthenticationProvider, OpenIdAuthenticationProvider</em></strong> 가 존재한다.<br>
+<img src="http://i.imgur.com/ByfYXXm.png" alt=""></p>
+<p><strong><em><center>[이미지 2]</center></em></strong><br>
+<strong>이미지2</strong> 는 AuthenticationProvider구현체까지 구현된 class다이어그램이다. 그림에서 보듯이 DaoAuthenticationProvider는 내부적으로 UserDetailsService를 이용해서 사용자 정보를 읽어오는데 아래 이미지 3은 Spring Security에서 UserDetailsService의 구현체인 jdbcDaoImpl까지 구현된 class다이어그램이다. 유저가 로그인을 하게되면 UserDetailsService의 loadUserByUsername으로 유저를 조회해 AuthencationProvider로 리턴해주고 AuthencationProvider의 authenticate메소드에서 유저가 입력한 비번과 대조하게된다.</p>
+<p><img src="http://i.imgur.com/nCawRsL.png" alt=""><br>
+<strong><em><center>[이미지 3]</center></em></strong><br>
+인증에 성공하게 되면 authenticate메소드에서 authentication 객체를 리턴해야한다. authentication 객체는 스프링에서 구현해놓은은 UsernamePasswordAuthenticationToken 사용해도 무방하다.UsernamePasswordAuthenticationToken(UserDetailsService.loadUserByUsername(String username),null(보통은널),권한) 을 생성하게되면 Aunthetication이 생성되어지고 최종적으로 이것을 리턴해주게되면 security 인증이 끝나게 된다.</p>
+<h2><span id="결론">결론</span></h2>
+<p>결론은 <strong><em>UserDetailsService</em></strong> 에 loadUserByUsername(String username)로 디비에서 유저정보를 조회 해오면 <strong><em>AuthenticationProvider</em></strong> 에서 authenticate(Authentication authentication)메소드로 <strong><em>UserDetailsService.loadUserByUsername(String username)</em></strong> 메소드로 가지고온 디비유저정보와 authenticate(Authentication authentication)로 접속한유저 정보(authentication)로 비밀번호를 인증을 처리하게되고 <strong><em>AuthenticationProvider</em></strong>  인증에 성공하게되면 <strong><em>Authentication객체</em></strong> 를 돌려준게된다.</p>
 <ul>
-<li><strong><em>spring security</em></strong> 는 <strong><em>authenticationManager</em></strong> 을 통해 인증을 구현한다.</li>
-<li><strong><em>authenticationManager</em></strong> 의 구현체로 <strong><em>ProviderManager</em></strong> 가 존재한다.</li>
-<li><strong><em>ProviderManager</em></strong> 는 인증구현을 <strong><em>AuthenticationProvider</em></strong> 에게 위임한다.</li>
-<li>일반적으로 <strong><em>AuthenticationProvider</em></strong> 을 커스터마이징해서 인증을 구현한다.</li>
-<li><strong><em>AuthenticationProvider</em></strong> 구현체는 3개가 있고, 이것에 인증에 성공하지 못할경우 예외처리가 발생한다.
-<ul>
-<li>구현체로 <strong><em>DaoAuthenticationProvider, LadpAuthenticationProvider, OpenIdAuthenticationProvider</em></strong> 가 존재한다.<br>
-<img src="http://i.imgur.com/ByfYXXm.png" alt=""><br>
-<strong><em><center>[이미지 2]</center></em></strong></li>
-</ul>
-</li>
-<li><strong>이미지2</strong> 는 AuthenticationProvider구현체까지 구현된 class다이어그램이다.</li>
-<li>DaoAuthenticationProvider는 내부적으로 UserDetailsService를 이용해서 사용자 정보를 읽어오는데 아래 이미지 3은 spring security에서 UserDetailsService의 구현체인 jdbcDaoImpl까지 구현된 class다이어그램이다.<br>
-<img src="http://i.imgur.com/nCawRsL.png" alt=""><br>
-<strong><em><center>[이미지 3]</center></em></strong></li>
-<li>authenticate메소드에서 authentication을 리턴할때 스프링에서 구현해놓은 UsernamePasswordAuthenticationToken 사용해도 무방하다.UsernamePasswordAuthenticationToken(UserDetailsService.loadUserByUsername(String username),null(보통은널),권한) 사용한다.</li>
-<li>결론은 <strong><em>UserDetailsService</em></strong> 에 loadUserByUsername(String username)로 디비에서 유저정보를 조회 해오면 <strong><em>AuthenticationProvider</em></strong> 에서 authenticate(Authentication authentication)메소드로 <strong><em>UserDetailsService.loadUserByUsername(String username)</em></strong> 메소드로 가지고온 디비유저정보와 authenticate(Authentication authentication)로 접속한유저 정보(authentication)로 비밀번호를 인증을 처리하게되고 <strong><em>AuthenticationProvider</em></strong>  인증에 성공하게되면 <strong><em>Authentication객체</em></strong> 를 돌려준게된다.</li>
 <li>디비에서 유저정보를 불러오려면 UserDetailsService interface를 직접 구현하면 된다.</li>
-<li>비밀번호비교를 직접 구현하려면 AuthenticationProvider 구현하면 된다.</li>
+<li>비밀번호 비교를 직접 구현하려면 AuthenticationProvider 구현하면 된다.</li>
 <li>AuthenticationProvider을 따로 구현안해도 UserDetailsService로 유저정보를 추가할수 있다.</li>
 </ul>
 <p>아이디/패스워드 사용자 정보를 넣고 실제 가입된 사용자인지 체크한후 인증에 성공하면 사용자의 principal과 credential 정보를 Authentication에 담습니다.<br>
@@ -279,9 +273,13 @@ Spring Security에서 방금 담은 Authentication을  SecurityContext에 보관
                 <!-- Pager -->
                 <ul class="pager">
                     
+                        <li class="previous">
+                            <a href="/2017/03/26/2017-03-26-spring-security-encryption/" data-toggle="tooltip" data-placement="top" title="Spring Security 암호화">&larr; Previous Post</a>
+                        </li>
+                    
                     
                         <li class="next">
-                            <a href="/2017/10/29/2017-10-29-Spring-Transaction,AspectJ-Compile/" data-toggle="tooltip" data-placement="top" title="AspectJ를 사용해서 같은 클래스내에도 새로운 트랜잭션 만들기">Next Post &rarr;</a>
+                            <a href="/2017/03/18/hexo-theme-beantech/" data-toggle="tooltip" data-placement="top" title="[Hexo] Theme BeanTech">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -311,7 +309,7 @@ Spring Security에서 방금 담은 Authentication을  SecurityContext에 보관
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">결론</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Spring Security 구조</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">결론</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">결론</span></a></li></ol>
         
         </div>
       </aside>
@@ -368,8 +366,8 @@ Spring Security에서 방금 담은 Authentication을  SecurityContext에 보관
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "https-minwan1-github-io";
-    var disqus_identifier = "https://minwan1.github.io/2017/11/25/2017-03-25-spring-security-theory/";
-    var disqus_url = "https://minwan1.github.io/2017/11/25/2017-03-25-spring-security-theory/";
+    var disqus_identifier = "https://minwan1.github.io/2017/03/25/2017-03-25-spring-security-theory/";
+    var disqus_url = "https://minwan1.github.io/2017/03/25/2017-03-25-spring-security-theory/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

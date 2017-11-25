@@ -219,7 +219,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3><span id="자바-exception">자바 Exception</span></h3>
+                <h2><span id="자바-exception">자바 Exception</span></h2>
 <p>자바에서 크게 에러는 2가지가 존재한다.</p>
 <ul>
 <li>문법에러
@@ -238,13 +238,13 @@
 <p>아래는 exception class들의 계층 구도이다.<br>
 <img src="http://i.imgur.com/NHoaID9.jpg" alt=""><br>
 이미지에서 체크되어져있는 부분의클래스(thorws 하니까)들은 예외처리를 필수로 안해줘도되지만 언체크된부분들은 필수로 예외처리를 해야만 컴파일이 되어진다.</p>
-<h3><span id="spring-exception">Spring Exception</span></h3>
+<h2><span id="spring-exception">Spring Exception</span></h2>
 <p>Srping에서 추천해주는 해결법은 3.2버전과 4.x버전이 존재한다. 3.2번전은 HandlerExceptionResolver, @ExceptionHandler을 사용하는것이고, 3.2이후 버전은 @controllerAdvice를 사용하는 방법이 있다.</p>
-<h4><span id="해결방법-1-컨트롤-레벨-exceptionhandler">해결방법 1. 컨트롤 레벨 @ExceptionHandler</span></h4>
+<h3><span id="해결방법-1-컨트롤-레벨-exceptionhandler">해결방법 1. 컨트롤 레벨 @ExceptionHandler</span></h3>
 <p>@ExceptionHandler 핸들러는 컨트롤러에서 잘작동한다. 예를들어 아래와 같이 &quot;/cal/divide&quot;를 호출했을대 연산중에 에러가 날경우 아래 ArithmeticException을 타게된다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooController</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"/cal/divide"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">divide</span><span class="params">(<span class="keyword">int</span> op1/<span class="keyword">int</span> op2)</span></span>&#123;</span><br><span class="line">		model.addAttribute(<span class="string">"result"</span>,op1/op2);</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"cal/result"</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@ExceptionHandler</span>(ArithmeticException.Class)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">handleException</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"error/exception"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>하지만 이것은 단점이 하나 존재한다. @ExceptionHandler는 오직 컨트롤러에서만 사용 가능하다. 이것을 basecontroller로 만들어 상속하여 이러한 문제를 조금은 해결할 수 있지만. 하지만 basecontroller 상속하게되면 다른 클래스들를 상속하여 사용할 수 없게 된다.</p>
-<h4><span id="해결방법-2-handlerexceptionresolver">해결방법 2. HandlerExceptionResolver</span></h4>
+<h3><span id="해결방법-2-handlerexceptionresolver">해결방법 2. HandlerExceptionResolver</span></h3>
 <p>HandlerExceptionResolver은 모든 던져지는 exception을 처리 할 수 있다. 이것은 또한 우리에게 restapi에서 처리할 수 있는 ExceptionHandler을 구현할 수 있게 해준다.</p>
 <ul>
 <li>ExceptionHandlerExceptionResolver
@@ -262,7 +262,7 @@
 </ul>
 </li>
 </ul>
-<h4><span id="해결방법-3-controlleradvice">해결방법 3. @ControllerAdvice</span></h4>
+<h3><span id="해결방법-3-controlleradvice">해결방법 3. @ControllerAdvice</span></h3>
 <p>@ControllerAdvice는 글로벌로 @ExceptionHandler를 지원한다. 아래는 server 내부에러나 resource를 찾지 못했을때 응답해줄 수 있는 핸들러이다. 아래와같이 특정 컨트롤러에 @ControllerAdvice를 추가하여 에러가 발생시 throw 처리를 통해 특정 handler로 응답처리를 손쉽게 해줄 수 있다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerStatusAdvice</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(value = &#123; HttpServerException.class &#125;)</span><br><span class="line">    <span class="meta">@ResponseStatus</span>(HttpStatus.INTERNAL_SERVER_ERROR)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> ErrorMessage <span class="title">handleConflict</span><span class="params">(RuntimeException ex, WebRequest request)</span> </span>&#123;</span><br><span class="line">    	ErrorMessage er = <span class="keyword">new</span> ErrorMessage();</span><br><span class="line">    	er.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());</span><br><span class="line">    	er.setMessage(ex.getMessage());</span><br><span class="line">        <span class="keyword">return</span> er;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(value = &#123;HttpNotFoundException.class &#125;)</span><br><span class="line">    <span class="meta">@ResponseStatus</span>(HttpStatus.NOT_FOUND)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> ErrorMessage <span class="title">handleNotfound</span><span class="params">(RuntimeException ex, WebRequest request)</span> </span>&#123;</span><br><span class="line">    	ErrorMessage er = <span class="keyword">new</span> ErrorMessage();</span><br><span class="line">    	er.setStatus(HttpStatus.NOT_FOUND.value());</span><br><span class="line">    	er.setMessage(ex.getMessage());</span><br><span class="line">        <span class="keyword">return</span> er;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@RequestMapping</span>(value=<span class="string">"/test"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ExecuteException</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> HttpServerException(<span class="string">"TEST"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>참고<br></p>
@@ -278,12 +278,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2017/08/06/2017-08-06-spring-remember-me/" data-toggle="tooltip" data-placement="top" title="Spring-RememberMe">&larr; Previous Post</a>
+                            <a href="/2017/08/06/2017-08-06-data-binding-principle/" data-toggle="tooltip" data-placement="top" title="Angular 데이터 바인딩 원리">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2017/04/22/2017-04-22-spring-social/" data-toggle="tooltip" data-placement="top" title="Spring-social-facebook 구현">Next Post &rarr;</a>
+                            <a href="/2017/04/22/2017-04-22-spring-security-implement/" data-toggle="tooltip" data-placement="top" title="Spring Security 로그인 인증 구현">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -313,7 +313,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">자바 Exception</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Spring Exception</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">해결방법 1. 컨트롤 레벨 @ExceptionHandler</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">해결방법 2. HandlerExceptionResolver</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">해결방법 3. @ControllerAdvice</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">자바 Exception</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Spring Exception</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">해결방법 1. 컨트롤 레벨 @ExceptionHandler</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">해결방법 2. HandlerExceptionResolver</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">해결방법 3. @ControllerAdvice</span></a></li></ol></li></ol>
         
         </div>
       </aside>

@@ -217,9 +217,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <br>
-Angural는 angular context가 존재한다. angular context 내에는 digest loop가 존재하는것을 볼 수 있다. 이 digest loop는 watch list를 루프를 돌며 $watch를 통해 모델의 변경을 체크하고 변경되었을경우 뷰를 업데이트한다.
-![](http://i.imgur.com/Gv8puCF.png)
+                <h1><span id="angular-데이터-바인딩-원리">Angular 데이터 바인딩 원리</span></h1>
+<p>Angural는 angular context가 존재한다. angular context 내에는 digest loop가 존재하는것을 볼 수 있다. 이 digest loop는 watch list를 루프를 돌며 $watch를 통해 모델의 변경을 체크하고 변경되었을경우 뷰를 업데이트한다.<br>
+<img src="http://i.imgur.com/Gv8puCF.png" alt=""></p>
 <p>Angular js에서 데이터 바인딩 전략은 Model을 변경했을때 어떻게 이벤트를 발생시키도록 할까가 아니라, 언제 Model이 변경되는가 이다.</p>
 <ul>
 <li>
@@ -234,7 +234,7 @@ Angural는 angular context가 존재한다. angular context 내에는 digest loo
 <p>여기에서 중요한점은 Model은 HTML이 아니라 Javascript객체이기 때문에 이벤트가 발생할 일이 없다.</p>
 </li>
 </ul>
-<h3><span id="angular에서는-모델이-언제-변경되는지를-체크한다">Angular에서는 모델이 언제 변경되는지를 체크한다.</span></h3>
+<p><strong>Angular에서는 모델이 언제 변경되는지를 체크한다.</strong></p>
 <ul>
 <li>
 <p>HTML 이벤트 헨들러가 일어났을 때 (ng-click, ng-change 등)</p>
@@ -277,12 +277,12 @@ Angural는 angular context가 존재한다. angular context 내에는 digest loo
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2017/10/07/2017-10-07-spring-Transaction,Exception/" data-toggle="tooltip" data-placement="top" title="Spring에서 Exception 발생시 Trasaction 처리 주의">&larr; Previous Post</a>
+                            <a href="/2017/08/06/2017-08-06-spring-remember-me/" data-toggle="tooltip" data-placement="top" title="Spring-RememberMe">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2017/08/06/2017-08-06-spring-remember-me/" data-toggle="tooltip" data-placement="top" title="Spring-RememberMe">Next Post &rarr;</a>
+                            <a href="/2017/06/04/2017-06-04-spring-exception/" data-toggle="tooltip" data-placement="top" title="Spring-Rest-Exception">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -312,7 +312,7 @@ Angural는 angular context가 존재한다. angular context 내에는 digest loo
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Angular에서는 모델이 언제 변경되는지를 체크한다.</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Angular 데이터 바인딩 원리</span></a></li></ol>
         
         </div>
       </aside>
