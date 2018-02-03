@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="WanBlog | 개발블로그">
+    <meta name="keyword"  content="WanBlog | 개발블로그">
+    <meta name="naver-site-verification" content="c80ae88a487472e88ec9170ad53578e81edad8b1"/>
+
+    <meta property="og:type" content="article">
+	  <meta property="og:title" content="Wan Blog">
+	  <meta property="og:url" content="https://minwan1.github.io/img/ironman-draw.png">
+	  <meta property="og:site_name" content="JavaScript/Java/Srping 개발 Blog">
+	  <meta property="og:description" content="WanBlog | 개발블로그">
+	  <meta property="og:image" content="https://minwan1.github.io/img/ironman-draw.png">
+	  <meta property="og:updated_time" content="2017-11-26T10:28:42.000Z">
+    
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          WanBlog | 개발블로그
+        
+    </title>
+
+    <link rel="canonical" href="https://minwan1.github.io/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/home-bg-2-dark.png') 
+            /*config*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="site-heading">
+                        <h1>Wan Blog</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading">JavaScript/Java/Srping 개발 Blog</span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Wan Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
+                <!-- Main Content -->
+
+
+<div class="post-preview">
+
+    <a href="/2018/02/04/2018-02-04-Class-Diagram/">
+        <h2 class="post-title">
+            Class Diagram
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Class Diagram이란?
+Class Diagram은 UML의 한종류이다. UML은 프로그램 설계를 표현하기 위해 사용하는, 주로 그림으로 된 표기법을 의미한다. 객체지향 언어와 밀접한 관려이 있기에 객체지향 모델링 언어라고도한다. 소프트웨어 시스템, 업무모델링, 시스템의 산출물을 규정하고 문서화하는 언어이고 이 UML종류중 하나가 클래스 다이어그......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2018-02-04
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Java" title="Java">Java</a>
+            
+              <a href="/tags/#ClassDiagram" title="ClassDiagram">ClassDiagram</a>
+            
+              <a href="/tags/#UML" title="UML">UML</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/10/29/2017-10-29-Spring-Transaction,AspectJ-Compile/">
+        <h2 class="post-title">
+            AspectJ를 사용해서 같은 클래스내에도 새로운 트랜잭션 만들기
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            AspectJ를 사용해서 같은 클래스내에도 새로운 트랜잭션 만들기
+
+스프링에서 트랜잭션을 처리하기 위해서는 일반적인 방법은 Proxy 클래스를 이용해 트랜잭션을 처리하는 것입니다. Spring AOP는 두 가지 Type의 Proxy를 지원하고 있습니다. 그 첫번째는 interface를 이용한 JDK Dynamic Proxy 기능을 이용하는 것이고, 두......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2017-10-29
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#Transaction" title="Transaction">Transaction</a>
+            
+              <a href="/tags/#AOP" title="AOP">AOP</a>
+            
+              <a href="/tags/#Proxy" title="Proxy">Proxy</a>
+            
+              <a href="/tags/#AspectJ" title="AspectJ">AspectJ</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/10/29/2017-10-29-Spring-AOP-Proxy/">
+        <h2 class="post-title">
+            Spring-AOP,Proxy 란?
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Spring-AOP,Proxy 란?
+AOP란 ?
+AOP는 문제를 해결하기 위한 핵심 관심 사항과 전체에 적용되는 공통 모듈 사항을 기준으로 프로그래밍 함으로써 공통 모듈을 여러 코드에 쉽게 적용할 수 있도록 도와주는 역할을 합니다. AOP를 구현하는 다양한 방법이 존재하지만, 기본적인 개념은 아래 그림과 같이 공통 관심 사항 코드를 비즈니스 로직을 구......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2017-10-29
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#AOP" title="AOP">AOP</a>
+            
+              <a href="/tags/#Proxy" title="Proxy">Proxy</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/10/08/2017-10-08-Spring-Container,Servlet-Container/">
+        <h2 class="post-title">
+            서블릿 컨테이너와 스프링 컨테이너
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            서블릿 컨테이너와 스프링 컨테이너
+서블릿 컨테이너
+서블릿 컨테이너는 개발자가 웹서버와 통신하기 위하여 소켓을 생성하고, 특정 포트에 리스닝하고, 스트림을 생성하는 등의 복잡한 일들을 할 필요가 없게 해준다. 컨테이너는 servlet의 생성부터 소멸까지의 일련의 과정(Lifer Cycle)을 관리한다. 서블릿 컨테이너는 요청이 들어올 때마다 새로운 자바......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2017-10-08
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#Container" title="Container">Container</a>
+            
+              <a href="/tags/#Servlet" title="Servlet">Servlet</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/10/07/2017-10-07-spring-Transaction,Exception/">
+        <h2 class="post-title">
+            Spring에서 Exception 발생시 Trasaction 처리 주의
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Spring에서 Exception 발생시 Trasaction 처리 주의
+
+자바에서는 총 3개의  Exception이 존재한다. Error, Checked Exception, Unchecked Exception
+
+Error
+첫째는 java.lang.Error 클래스의 서브 클래스들이다. 에러는 시스템에 뭔가 비정상적인 상황이 발생했을 경우에 사용된다. ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2017-10-07
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#Exception" title="Exception">Exception</a>
+            
+              <a href="/tags/#Transaction" title="Transaction">Transaction</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/08/06/2017-08-06-data-binding-principle/">
+        <h2 class="post-title">
+            Angular 데이터 바인딩 원리
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Angular 데이터 바인딩 원리
+Angural는 angular context가 존재한다. angular context 내에는 digest loop가 존재하는것을 볼 수 있다. 이 digest loop는 watch list를 루프를 돌며 $watch를 통해 모델의 변경을 체크하고 변경되었을경우 뷰를 업데이트한다.
+
+Angular js에서 데이터 바인딩......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2017-08-06
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Angular" title="Angular">Angular</a>
+            
+              <a href="/tags/#data-bind" title="data-bind">data-bind</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/08/06/2017-08-06-spring-remember-me/">
+        <h2 class="post-title">
+            Spring-RememberMe
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Spring-RememberMe 구현
+
+일반적으로 우리는 브라우저를 닫는순간 세션이 끊기고 브라우저를 다시 켜게되면 로그인을 통해 세션을 연결해준다.하지만 rememberme 기능을 이용하면 브라우저를 열면 자동 로그인을 하게 된다.  일반적으로 브라우저로 쿠키를 보냄으로써 세션에 의해 쿠키가 발견되고 자동적으로 로그인이 일어날것이다. spring s......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2017-08-06
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#Remember-Me" title="Remember-Me">Remember-Me</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/06/04/2017-06-04-spring-exception/">
+        <h2 class="post-title">
+            Spring-Rest-Exception
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            자바 Exception
+자바에서 크게 에러는 2가지가 존재한다.
+
+문법에러
+
+오타와같이 자바 구문에서 에러가나는 경우 이다. 이것은 컴파일시 에러로 발생으로 수 가능하다.
+
+
+실행에러
+
+실행 에러는 프로그램 실행시 상황에 따라 발생하는 오류이다.
+실행 에러안에서 크게 또 논리에러, 시스템에러, 예외사항으로 나뉘어진다.
+
+
+
+여기서 문법적인 에러는 컴파......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2017-06-04
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#Exception" title="Exception">Exception</a>
+            
+              <a href="/tags/#Rest" title="Rest">Rest</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/22/2017-04-22-spring-social/">
+        <h2 class="post-title">
+            Spring-social-facebook 구현
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Spring-social-facebook 구현
+내용
+Spring social 로그인은 두가지 구현 방법이 있다. Connect Framework/Provider Sign In 방법이 있다.
+12"/connection/facebook" post"/signin/facebook" post
+
+Connect 방법은 타임라인에 글을 보거나 쓰는용도로 많이쓰인다.......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2017-04-22
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#Social" title="Social">Social</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/22/2017-04-22-spring-security-implement/">
+        <h2 class="post-title">
+            Spring Security 로그인 인증 구현
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Spring Security 로그인 인증 구현
+개요
+Spring Security에서 인증 사용할때 최상위 인터페이스 AuthenticationProviderManager Interface를 사용한다. 이인터페이스는 단순하게 아래와같이 정의 되어있다.
+123public interface authenticationManager&#123;  Authenti......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2017-04-22
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#Security" title="Security">Security</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    
+        <li class="next">
+            <a href="/archives/2/">Older Posts &rarr;</a>
+        </li>
+    
+</ul>
+
+
+
+                <!-- 如果开启评论功能 -->
+                
+            </div>
+
+          <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+            <a href="/tags/#Spring" title="Spring" rel="10">Spring</a>
+            
+        
+            
+            <a href="/tags/#security" title="security" rel="2">security</a>
+            
+        
+            
+            <a href="/tags/#ETC" title="ETC" rel="2">ETC</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Exception" title="Exception" rel="2">Exception</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Transaction" title="Transaction" rel="2">Transaction</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#AOP" title="AOP" rel="2">AOP</a>
+            
+        
+            
+            <a href="/tags/#Proxy" title="Proxy" rel="2">Proxy</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+</section>
+
+        <hr>
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
+
+        
+            <img id = "avatar_pic" src="/img/ironman-draw.png" />
+        
+
+        
+            <p>Hi, i&#39;m Wan</p>
+        
+
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+            
+
+            
+
+            
+
+            
+                <li>
+                    <a target="_blank"  href="https://github.com/Minwan1">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+        </ul>
+    </div>
+</section>
+        <hr>
+    
+        
+  <h5>RECENT POSTS</h3>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/2018/02/04/2018-02-04-Class-Diagram/">Class Diagram</a>
+        </li>
+      
+        <li>
+          <a href="/2017/10/29/2017-10-29-Spring-Transaction,AspectJ-Compile/">AspectJ를 사용해서 같은 클래스내에도 새로운 트랜잭션 만들기</a>
+        </li>
+      
+        <li>
+          <a href="/2017/10/29/2017-10-29-Spring-AOP-Proxy/">Spring-AOP,Proxy 란?</a>
+        </li>
+      
+        <li>
+          <a href="/2017/10/08/2017-10-08-Spring-Container,Servlet-Container/">서블릿 컨테이너와 스프링 컨테이너</a>
+        </li>
+      
+        <li>
+          <a href="/2017/10/07/2017-10-07-spring-Transaction,Exception/">Spring에서 Exception 발생시 Trasaction 처리 주의</a>
+        </li>
+      
+    </ul>
+  </div>
+
+        <hr>
+    
+        <!-- Friends Blog -->
+
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+
+    
+        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+    
+        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+    
+        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+    
+        <li><a href="#" target="_blank">It Helps SEO</a></li>
+    
+</ul>
+
+        <hr>
+    
+</div>
+
+        
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/Minwan1">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Wan 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://minwan1.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://minwan1.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
