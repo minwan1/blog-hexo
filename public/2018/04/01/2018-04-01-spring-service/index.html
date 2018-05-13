@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="WanBlog | 개발블로그">
+    <meta name="keyword"  content="WanBlog | 개발블로그">
+    <meta name="naver-site-verification" content="c80ae88a487472e88ec9170ad53578e81edad8b1"/>
+
+    <meta property="og:type" content="article">
+	  <meta property="og:title" content="Wan Blog">
+	  <meta property="og:url" content="https://minwan1.github.io/img/ironman-draw.png">
+	  <meta property="og:site_name" content="JavaScript/Java/Srping 개발 Blog">
+	  <meta property="og:description" content="WanBlog | 개발블로그">
+	  <meta property="og:image" content="https://minwan1.github.io/img/ironman-draw.png">
+	  <meta property="og:updated_time" content="2017-11-26T10:28:42.000Z">
+    
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          스프링 기능 추상화 예제 - WanBlog | 개발블로그
+        
+    </title>
+
+    <link rel="canonical" href="https://minwan1.github.io/2018/04/01/2018-04-01-spring-service/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('null')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Spring" title="Spring">Spring</a>
+                            
+                              <a class="tag" href="/tags/#service" title="service">service</a>
+                            
+                              <a class="tag" href="/tags/#abstraction" title="abstraction">abstraction</a>
+                            
+                              <a class="tag" href="/tags/#추상화" title="추상화">추상화</a>
+                            
+                              <a class="tag" href="/tags/#토비" title="토비">토비</a>
+                            
+                              <a class="tag" href="/tags/#서비스" title="서비스">서비스</a>
+                            
+                              <a class="tag" href="/tags/#interface" title="interface">interface</a>
+                            
+                        </div>
+                        <h1>스프링 기능 추상화 예제</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Wan on
+                            2018-04-01
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Wan Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2><span id="스프링-기능-추상화-예제">스프링 기능 추상화 예제</span></h2>
+<h3><span id="시작하며">시작하며</span></h3>
+<p>이글의 내용은 <a href="http://book.naver.com/bookdb/book_detail.nhn?bid=7006516" target="_blank" rel="noopener">토비의 스프링</a>책의 내용으로 제가 이해한 스프링 서비스 추상화에 대한 내용을 정리한 글입니다. 물론 책에 더 상세하게 설명이 되어있지만 개인적으로 간단하게 정리하고 싶었습니다. 다른 사람에게 잘 설명을 할 수 있어야 더욱 깊게 이 내용을 이해한 것이라고 생각하기 때문입니다!! 물론 또 저만을 위한 것은 아니고 이 글을 통해 서비스 추상화에 대한 이해를 하시는데 도움이 되시는 분들이 있을 거라고 생각합니다! [참고로 책에서는 mybatis 예제였으나… 이 글에서 Spring JPA로 구현한 예제입니다.]</p>
+<h3><span id="추상화란">추상화란</span></h3>
+<p>자바에는 표준 스펙, 사용 제품, 오픈소스를 통틀어서 사용방법과 형식은 다르지만 기능과 목적이 유사한 기술이 존재한다. 환경과 상황에 따라서 기술이 바뀌고, 그에 따른 다른 API를 사용하고 다른 스타일의 접근 방법을 따라야 한다는 건 매우 피곤한 일이다. 이러한 문제를 해결하기 위해서는 규격을 정하고 그것을 이용해야 한다. 그 규격은 인터페이스로 정할 수 있다. 예를 들어 List라는 인터페이스가 있으면 우리는 구현체를 ArrayList를 선언하느냐, LinkedList를 선언하느냐에 따라 구현체가 달라진다. 이렇듯 구현체를 어떻게 구성하느냐에 쓸 수 있는 기능, 효율이 달라진다. 다음 글에서 스프링이 어떻게 성격이 비슷한 여러 종류의 기술을 추상화하고 이를 일관된 방법으로 사용할 수 있도록 지원하는지 확인할 것이다. 이 글에서는 정책에 따른 유저 레벨[티어] 업그레이드를 추상화하는 방법에 대해 설명할 것이다. 좀 더 상세한 설명은 아래에서 설명할 것이다.</p>
+<h4><span id="요구사항">요구사항</span></h4>
+<p>먼저 책에서 Level, User, UserService, UserRepository, 의 클래스가 있다. 이 클래스들을 이용해서 우리는 유저의 레벨 관리 기능을 추가해야 한다. 유저의 레벨 관리 기능은 관리자 호출 등을 통해서 userService.upgradeLevels()라는 메서드를 호출했을 때 이 애플리케이션의 존재하는 유저들이 아래의 요구 조건에 맞게 유저의 레벨을 올려야 한다는 요구 조건이다.</p>
+<p>다음은 요구조건과 레벨이 올라가기 위한조건에 대한 내용이다.</p>
+<ul>
+<li>사용자의 레벨은 BASIC, SILVER, GOLD 세가지중 하나이다.</li>
+<li>사용자가 처음 가입하면 BASIC 레벨이 되며, 이후 활동에 따라서 한단계씩 업그레이드 될 수 있다.</li>
+<li>가입 후 50회 이상 로그인을 하면 BASIC에서 SIRVER레벨이 된다.</li>
+<li>SILVER레벨이면서 30번 이상 추천을 받으면 GOLD레벨이 된다.</li>
+<li>사용자 레벨의 변경 작업은 일정한 주기를 가지고 일관적으로 진행된다. userService.upgradeLevels()를 호출하기 전까지는 조건을 충족하더라도 레벨의 변경이 일어나지 않는다.</li>
+</ul>
+<p>참고로 위의 기본 요구 조건은 정해진 조건에 따라 사용자의 레벨이 주기적으로 변경되거나 레벨을 업그레드하는 정책이 변경될 수 있다. 예를들어 연말 이벤트나, 새로운 서비스 홍보기간중에는 레벨 조건 정책이 바뀔 수 있다. 이럴때 어떻게 효율적으로 변경할 수 있을까. 그것은 바로 추상화이다. 여기에서 추상화해야 할것은 바로 UserLevelUpgradePolicy이다. 먼저 위의 요구 조건의 맞는 기능을 구현하고 이것을 어떻게 추상화하여 유연하게 바꿀지에 대해 생각해보자.</p>
+<h4><span id="객체선언">객체선언</span></h4>
+<p>먼저 아래와 같이 요구조건에 맞는 객체와 서비스들을 선언하자.</p>
+<h5><span id="user-객체">User 객체</span></h5>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Level level;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> loginCount;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> recommend;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Builder</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(String id, Level level, <span class="keyword">int</span> loginCount, <span class="keyword">int</span> recommend, String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.level = level;</span><br><span class="line">        <span class="keyword">this</span>.loginCount = loginCount;</span><br><span class="line">        <span class="keyword">this</span>.recommend = recommend;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLevel</span><span class="params">(Level level)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.level = level;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateLevel</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Level nextLevel = <span class="keyword">this</span>.level.nextLevel();</span><br><span class="line">        <span class="keyword">if</span>(nextLevel == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="keyword">this</span>.level + <span class="string">"은 업그레이드가 불가능합니다."</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.level = nextLevel;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5><span id="레벨-객체">레벨 객체</span></h5>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Level &#123;</span><br><span class="line">    GOLD(<span class="number">3</span>, <span class="keyword">null</span>),</span><br><span class="line">    SILVER(<span class="number">2</span>, GOLD),</span><br><span class="line">    BASIC(<span class="number">1</span>, SILVER),</span><br><span class="line">    ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> value;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Level next;</span><br><span class="line"></span><br><span class="line">    Level(<span class="keyword">int</span> value, Level next)&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">        <span class="keyword">this</span>.next = next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">value</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Level <span class="title">nextLevel</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>관리자가 아래의 기능을 호출하면 애플리케이션에 모든 유저들의 레벨이 레벨정책조건에 따라 업데이트가 된다.</p>
+<h5><span id="userservice-객체">UserService 객체</span></h5>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// userService</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">upgradeLevels</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;User&gt; users = (List&lt;User&gt;) userRepository.findAll(); <span class="comment">// 모든 유저 조회</span></span><br><span class="line">    <span class="keyword">for</span>(User user : users)&#123; <span class="comment">// 유저하나하나 조회</span></span><br><span class="line">        <span class="keyword">if</span>(canUpgradeLevel(user)) <span class="comment">// 업그레이드 가능여부</span></span><br><span class="line">            user.updateLevel(); <span class="comment">// 업그레이드</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">canUpgradeLevel</span><span class="params">(User user)</span></span>&#123;<span class="comment">// 레벨 업그레이드 가능한지 여부를 체크하는 함수이다.</span></span><br><span class="line">    Level currentLevel = user.getLevel();</span><br><span class="line">    <span class="keyword">switch</span> (currentLevel)&#123;</span><br><span class="line">        <span class="keyword">case</span> BASIC: <span class="keyword">return</span> (user.getLoginCount() &gt;= MIN_LOGCOUNT_FOR_SILVER); <span class="comment">//로그인한횟수</span></span><br><span class="line">        <span class="keyword">case</span> SILVER: <span class="keyword">return</span> (user.getRecommend() &gt;= MIN_RECCOMEND_FOR_GOLD); <span class="comment">// 추천횟수</span></span><br><span class="line">        <span class="keyword">case</span> GOLD: <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">default</span>: <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Unknown Level"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>여기까지 간단하게 기능을 구현했다. upgradeLevels메소드를 호출하면 모든 유저를 조회해서 요구조건에 맞게 레벨업을 시킨다. 지금은 업그레이드 가능여부를 로그인 카운트와 추천 카운트를 기반으로 유저의 레벨업을 시켰다. 하지만 위에서 말한대로 연말 이벤트나 새로운 서비스 홍보 기간중에 레벨업그레이드 정책이 달라질 수 가 있다. 물론 현재 canUpgradeLevel메소드를 지우고 새롭게 코드를 짜는 방법도 있다. 하지만 이벤트성 레벨업그레이드는 한번만 사용하거나 그 비슷한 이벤트가 일어나야 다시 사용할 수 있다. 그래서 이런 부분을 부품처럼 잘라 내서 관리 할수 있다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserLevelUpgradePolicy</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">canUpgradeLevel</span><span class="params">(User user)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이렇게 레벨 업그레이드 정책기능을 인터페이스로 만들어 필요한 정책에 따라 의존성 주입을해서 사용할 수 있다. 예를 들어 아래와 같이 사용할 수 있다. 아래 보면 UserLevelUpgradePolicy라는 인터페이스를 선언했다. 그리고 userService에서 그 인터페이스를 이용해 정책에 따라 구현 Component를 주입받아 레벨을 업그레이드한다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//userService</span></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> UserLevelUpgradePolicy userLevelUpgradePolicy;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">upgradeLevels</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;User&gt; users = (List&lt;User&gt;) userRepository.findAll(); <span class="comment">// 모든 유저 조회</span></span><br><span class="line">    <span class="keyword">for</span>(User user : users)&#123; <span class="comment">// 유저하나하나 조회</span></span><br><span class="line">        <span class="keyword">if</span>(userLevelUpgradePolicy.canUpgradeLevel(user)) <span class="comment">// 업그레이드 가능여부</span></span><br><span class="line">            user.updateLevel(); <span class="comment">// 업그레이드</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이제 일반적인 업그레이드 정책이냐, 이벤트에 정책이냐에 따라서 아래와 같이 정책을 사용할 수 있다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrdinaryLevelUpgradePolicy</span> <span class="keyword">implements</span> <span class="title">UserLevelUpgradePolicy</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canUpgradeLevel</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">        Level currentLevel = user.getLevel();</span><br><span class="line">        <span class="keyword">switch</span> (currentLevel)&#123;</span><br><span class="line">            <span class="keyword">case</span> BASIC: <span class="keyword">return</span> (user.getLoginCount() &gt;= MIN_LOGCOUNT_FOR_SILVER);</span><br><span class="line">            <span class="keyword">case</span> SILVER: <span class="keyword">return</span> (user.getRecommend() &gt;= MIN_RECCOMEND_FOR_GOLD);</span><br><span class="line">            <span class="keyword">case</span> GOLD: <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">default</span>: <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Unknown Level"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EventLevelUpgradePolicy</span> <span class="keyword">implements</span> <span class="title">UserLevelUpgradePolicy</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canUpgradeLevel</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//이벤트성 비즈니스로직</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>레벨정책에 따라 아래와같이 의존성 주입을 해줄 수 있다. 그렇게되면 일반적인 정책과 이벤트 진행에따라 정책을 유연하게 변경할 수 있다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> UserLevelUpgradePolicy <span class="title">userLevelUpgradePolicy</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> OrdinaryLevelUpgradePolicy();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="마무리하며">마무리하며</span></h3>
+<p>여기까지 아주간단하게 스프링에서 어떻게 추상화를 사용할지에 대해 간단히 구현해봤다. 이렇게 하면 어떤 정책클래스를 주입받았느냐에 따라서 유저 레벨을 업그레이드할 수 있다. 물론 그 구현체 클래스에 비즈니스로직에 따라서 업그레이드를 할 수 있느냐 못하느냐가 결정된다. 위에서 구현한 레벨업그레이드 정책클레스에서는 워낙 비즈니스로직이 간단해서 저렇게까지 하나 이런생각이 들 수 있다. 하지만 정책이 더 생기고, 비즈니스 로직이 아주 복잡하다고 생각하면 이렇게 추상화해서 사용하는것은 유지보수, 확장성면에 아주 큰도움이 될것이다. 또한 이렇게 구성함으로 SOLID 원칙에서 말하는 원칙중 하나인 단일책임의 원칙을 아주 잘 지킬 수 있다.</p>
+<p>위와같이 UserLevelUpgradePolicy를 인터페이스로 뺌으로써 어떤 정책이 들어와도 적절하게 책임과 관심이 다른 코드로 분리된다. 또한 애플리케이션 로직과 기술/환경을 분리하는 등의 작업을 통해 어떤 변경이 필요할 때 수정 대상이 명확해진다.</p>
+<p>추상화를 통해 인터페이스를 도입하고 이를  DI 를 통해 연결하고 그로 인해 개방 패쇄 원칙도 잘 지키고 모듈 간에 결합도가 낮아서 서로의 변경이 영향을 주지 않고, 같은 이유로 변경이 단일 책임에 집중되는 응집도가 높은 코드가 나오게 되었다.</p>
+<p>예제소스는 아래에서 참고할 수 있습니다.</p>
+<p><a href="https://github.com/minwan1/Spring-tobi/tree/service-abstraction-level-policy/5-service-abstraction" target="_blank" rel="noopener">git-hub-예제소스</a></p>
+<p>참고</p>
+<ul>
+<li><a href="http://book.naver.com/bookdb/book_detail.nhn?bid=7006516" target="_blank" rel="noopener">토비의 스프링</a></li>
+</ul>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/03/18/2018-03-18-Spring-Cache/" data-toggle="tooltip" data-placement="top" title="Spring cache">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">스프링 기능 추상화 예제</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">시작하며</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">추상화란</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">요구사항</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">객체선언</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.2.1.</span> <span class="toc-nav-text">User 객체</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.2.2.</span> <span class="toc-nav-text">레벨 객체</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.2.3.</span> <span class="toc-nav-text">UserService 객체</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">마무리하며</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Spring" title="Spring">Spring</a>
+                        
+                          <a class="tag" href="/tags/#service" title="service">service</a>
+                        
+                          <a class="tag" href="/tags/#abstraction" title="abstraction">abstraction</a>
+                        
+                          <a class="tag" href="/tags/#추상화" title="추상화">추상화</a>
+                        
+                          <a class="tag" href="/tags/#토비" title="토비">토비</a>
+                        
+                          <a class="tag" href="/tags/#서비스" title="서비스">서비스</a>
+                        
+                          <a class="tag" href="/tags/#interface" title="interface">interface</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "https-minwan1-github-io";
+    var disqus_identifier = "https://minwan1.github.io/2018/04/01/2018-04-01-spring-service/";
+    var disqus_url = "https://minwan1.github.io/2018/04/01/2018-04-01-spring-service/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/Minwan1">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Wan 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://minwan1.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://minwan1.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

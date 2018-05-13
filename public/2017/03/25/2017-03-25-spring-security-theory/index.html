@@ -237,8 +237,8 @@
 <p><img src="http://i.imgur.com/nCawRsL.png" alt=""><br>
 <strong><em><center>[이미지 3]</center></em></strong><br>
 인증에 성공하게 되면 authenticate메소드에서 authentication 객체를 리턴해야한다. authentication 객체는 스프링에서 구현해놓은은 UsernamePasswordAuthenticationToken 사용해도 무방하다.UsernamePasswordAuthenticationToken(UserDetailsService.loadUserByUsername(String username),null(보통은널),권한) 을 생성하게되면 Aunthetication이 생성되어지고 최종적으로 이것을 리턴해주게되면 security 인증이 끝나게 된다.</p>
-<h2><span id="결론">결론</span></h2>
-<p>결론은 <strong><em>UserDetailsService</em></strong> 에 loadUserByUsername(String username)로 디비에서 유저정보를 조회 해오면 <strong><em>AuthenticationProvider</em></strong> 에서 authenticate(Authentication authentication)메소드로 <strong><em>UserDetailsService.loadUserByUsername(String username)</em></strong> 메소드로 가지고온 디비유저정보와 authenticate(Authentication authentication)로 접속한유저 정보(authentication)로 비밀번호를 인증을 처리하게되고 <strong><em>AuthenticationProvider</em></strong>  인증에 성공하게되면 <strong><em>Authentication객체</em></strong> 를 돌려준게된다.</p>
+<h2><span id="security-인증-순서">Security 인증 순서</span></h2>
+<p>Security 인증 순서는 <strong><em>UserDetailsService</em></strong> 에 loadUserByUsername(String username)로 디비에서 유저정보를 조회 해오면 <strong><em>AuthenticationProvider</em></strong> 에서 authenticate(Authentication authentication)메소드로 <strong><em>UserDetailsService.loadUserByUsername(String username)</em></strong> 메소드로 가지고온 디비유저정보와 authenticate(Authentication authentication)로 접속한유저 정보(authentication)로 비밀번호를 인증을 처리하게되고 <strong><em>AuthenticationProvider</em></strong>  인증에 성공하게되면 <strong><em>Authentication객체</em></strong> 를 돌려준게된다.</p>
 <ul>
 <li>디비에서 유저정보를 불러오려면 UserDetailsService interface를 직접 구현하면 된다.</li>
 <li>비밀번호 비교를 직접 구현하려면 AuthenticationProvider 구현하면 된다.</li>
@@ -318,7 +318,7 @@ Spring Security에서 방금 담은 Authentication을  SecurityContext에 보관
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Spring Security 구조</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">결론</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">결론</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Spring Security 구조</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Security 인증 순서</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">결론</span></a></li></ol>
         
         </div>
       </aside>

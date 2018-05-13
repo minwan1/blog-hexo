@@ -23,8 +23,8 @@ tags:
 ***<center>[이미지 3]</center>***
 인증에 성공하게 되면 authenticate메소드에서 authentication 객체를 리턴해야한다. authentication 객체는 스프링에서 구현해놓은은 UsernamePasswordAuthenticationToken 사용해도 무방하다.UsernamePasswordAuthenticationToken(UserDetailsService.loadUserByUsername(String username),null(보통은널),권한) 을 생성하게되면 Aunthetication이 생성되어지고 최종적으로 이것을 리턴해주게되면 security 인증이 끝나게 된다.
 
-## 결론
-결론은 ***UserDetailsService*** 에 loadUserByUsername(String username)로 디비에서 유저정보를 조회 해오면 ***AuthenticationProvider*** 에서 authenticate(Authentication authentication)메소드로 ***UserDetailsService.loadUserByUsername(String username)*** 메소드로 가지고온 디비유저정보와 authenticate(Authentication authentication)로 접속한유저 정보(authentication)로 비밀번호를 인증을 처리하게되고 ***AuthenticationProvider***  인증에 성공하게되면 ***Authentication객체*** 를 돌려준게된다.
+## Security 인증 순서
+Security 인증 순서는 ***UserDetailsService*** 에 loadUserByUsername(String username)로 디비에서 유저정보를 조회 해오면 ***AuthenticationProvider*** 에서 authenticate(Authentication authentication)메소드로 ***UserDetailsService.loadUserByUsername(String username)*** 메소드로 가지고온 디비유저정보와 authenticate(Authentication authentication)로 접속한유저 정보(authentication)로 비밀번호를 인증을 처리하게되고 ***AuthenticationProvider***  인증에 성공하게되면 ***Authentication객체*** 를 돌려준게된다.
 * 디비에서 유저정보를 불러오려면 UserDetailsService interface를 직접 구현하면 된다.
 * 비밀번호 비교를 직접 구현하려면 AuthenticationProvider 구현하면 된다.
 * AuthenticationProvider을 따로 구현안해도 UserDetailsService로 유저정보를 추가할수 있다.
