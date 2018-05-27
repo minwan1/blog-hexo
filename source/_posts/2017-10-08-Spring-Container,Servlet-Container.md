@@ -47,7 +47,7 @@ Spring Container는 Bean들의 생명주기를 관리한다. Spring Container는
 
 
 
-## 웹어플리케이션 동작원리
+## Spring 웹어플리케이션 동작원리
 
 ![](https://i.imgur.com/PlDF42i.png)
 

@@ -1,5 +1,5 @@
 ---
-title: Spring-AOP,Proxy 란?
+title: Spring-AOP, Proxy 란?
 catalog: true
 date: 2017-10-29
 subtitle:
