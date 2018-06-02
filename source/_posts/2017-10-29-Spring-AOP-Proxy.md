@@ -1,5 +1,5 @@
 ---
-title: Spring-AOP,Proxy 란?
+title: Spring-AOP, Proxy 란?
 catalog: true
 date: 2017-10-29
 subtitle:
@@ -11,7 +11,7 @@ tags:
 ---
 
 
-# Spring-AOP,Proxy 란?
+# Spring-AOP, Proxy 란?
 
 ## AOP란 ?<br>
 
@@ -70,10 +70,10 @@ Advice를 Weaving하는 방식에는 세가지 방식이 존재합니다.
 ### CGLIB
 대상객체가 인터페이스를 구현하고 있지 않고 바로 클래스를 사용한다면, 스프링은 CGLIB를 이용하여 클래스에 대한 프록시 객체를 생성합니다. CGLIB는 대상 클래스를 상속 받아 프록시를 구현합니다. 따라서 클래스가 final인경우에는 프록시를 생성할 수 없습니다.
 
-강제로 CGLIB를 이용하여 Proxy를 생성하는 방법
-```
+#### 강제로 CGLIB를 이용하여 Proxy를 생성하는 방법
+
 @EnableAspectJAutoProxy 어노테이션 속성으로 proxyTaretClass란 것이 있습니다. 위에서 말한대로 Spirng AOP는 Proxy class를 생성함으로 AOP를 구현 합니다. AOP의 대상이 되는 클래스가 Interface를 구현하고 있을 경우 Spring은 Interface를 이용하는 JDK Dynamic Proxy를 만들어서 AOP를 구현하고 Interface를 구현하지 않고 클래스에 대해서는 CG-LIB를 이용한 대상클래스의 상속을받아 서브클래스를 만들어 이를 Proxy삼아 AOP 구현하게 됩니다. 이 속성 값을 주지 않으면 기본값은 false이기 때문에 대상이 되는 클래스가 interface를 이용한것은 자동으로 JDK Dynamic Proxy를 이용해서 AOP를 생성하고 아닌경우에는 CG-LIB를 이용해 클래스  Proxy로 AOP를 구현하게 됩니다. 이 속성을 true로 주게되면 인터페이스 또한 CG-LIB를 이용하여 서브클래스 생성하는 방식으로 AOP의 프록시를 구현하게 됩니다.
-```
+
 
 출처 <br>
 * [최범균](http://book.naver.com/bookdb/book_detail.nhn?bid=7918153) <br>
