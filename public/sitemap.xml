@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://minwan1.github.io/2018/05/28/2018-05-28-spring-mvc/</loc>
+    
+    <lastmod>2018-05-27T16:32:16.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://minwan1.github.io/2017/10/08/2017-10-08-Spring-Container,Servlet-Container/</loc>
     
     <lastmod>2018-05-27T16:12:32.000Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>https://minwan1.github.io/2018/05/28/2018-05-28-HMAC/</loc>
     
     <lastmod>2018-05-27T16:10:01.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://minwan1.github.io/2018/05/28/2018-05-28-spring-service/</loc>
-    
-    <lastmod>2018-05-27T16:08:06.000Z</lastmod>
     
   </url>
   
