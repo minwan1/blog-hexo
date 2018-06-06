@@ -14,7 +14,7 @@
     <meta property="og:type" content="article">
 	  <meta property="og:title" content="Wan Blog">
 	  <meta property="og:url" content="https://minwan1.github.io/img/ironman-draw.png">
-	  <meta property="og:site_name" content="JavaScript/Java/Srping 개발 Blog">
+	  <meta property="og:site_name" content="JavaScript/Java/Spring 개발 Blog">
 	  <meta property="og:description" content="WanBlog | 개발블로그">
 	  <meta property="og:image" content="https://minwan1.github.io/img/ironman-draw.png">
 	  <meta property="og:updated_time" content="2017-11-26T10:28:42.000Z">
@@ -24,7 +24,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Spring-AOP,Proxy 란? - WanBlog | 개발블로그
+          Spring-AOP, Proxy 란? - WanBlog | 개발블로그
         
     </title>
 
@@ -107,7 +107,7 @@
                               <a class="tag" href="/tags/#Proxy" title="Proxy">Proxy</a>
                             
                         </div>
-                        <h1>Spring-AOP,Proxy 란?</h1>
+                        <h1>Spring-AOP, Proxy 란?</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Wan on
@@ -228,7 +228,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="spring-aopproxy-란">Spring-AOP,Proxy 란?</span></h1>
+                <h1><span id="spring-aop-proxy-란">Spring-AOP, Proxy 란?</span></h1>
 <h2><span id="aop란">AOP란 ?<br></span></h2>
 <p>AOP는 문제를 해결하기 위한 핵심 관심 사항과 전체에 적용되는 공통 모듈 사항을 기준으로 프로그래밍 함으로써 공통 모듈을 여러 코드에 쉽게 적용할 수 있도록 도와주는 역할을 합니다. AOP를 구현하는 다양한 방법이 존재하지만, 기본적인 개념은 아래 그림과 같이 공통 관심 사항 코드를 비즈니스 로직을 구현한 코드안에 삽입하는 것입니다.<br>
 <img src="https://i.imgur.com/a0AFbrG.png" alt=""><br>
@@ -314,7 +314,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Spring-AOP,Proxy 란?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">AOP란 ?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">AOP용어</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">3가지 Weaving 방식</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Spring-AOP란?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">프록시를 이용한 AOP 구현</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.5.1.</span> <span class="toc-nav-text">JDK Dynamic Proxy</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.5.2.</span> <span class="toc-nav-text">CGLIB</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.5.2.1.</span> <span class="toc-nav-text">강제로 CGLIB를 이용하여 Proxy를 생성하는 방법</span></a></li></ol></li></ol></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Spring-AOP, Proxy 란?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">AOP란 ?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">AOP용어</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">3가지 Weaving 방식</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Spring-AOP란?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">프록시를 이용한 AOP 구현</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.5.1.</span> <span class="toc-nav-text">JDK Dynamic Proxy</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.5.2.</span> <span class="toc-nav-text">CGLIB</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.5.2.1.</span> <span class="toc-nav-text">강제로 CGLIB를 이용하여 Proxy를 생성하는 방법</span></a></li></ol></li></ol></li></ol></li></ol>
         
         </div>
       </aside>
