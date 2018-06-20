@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>https://minwan1.github.io/2018/06/19/2018-06-19-%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%EB%9E%80%5BOS-1%5D/</loc>
+        <lastmod>2018-06-18T15:54:09.583Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://minwan1.github.io/2018/06/14/2018-06-14-EntityManagerFactory,%20EntityManager,%20PersistenceContext%EB%9E%80/</loc>
         <lastmod>2018-06-14T12:31:55.396Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -167,14 +175,6 @@
     </url>
 
     <url>
-        <loc>https://minwan1.github.io/2017/06/04/2017-06-04-spring-exception/</loc>
-        <lastmod>2018-02-24T10:35:39.124Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://minwan1.github.io/2017/08/06/2017-08-06-data-binding-principle/</loc>
         <lastmod>2018-02-24T10:35:39.124Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -184,6 +184,14 @@
 
     <url>
         <loc>https://minwan1.github.io/2017/04/22/2017-04-22-spring-social/</loc>
+        <lastmod>2018-02-24T10:35:39.124Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://minwan1.github.io/2017/06/04/2017-06-04-spring-exception/</loc>
         <lastmod>2018-02-24T10:35:39.124Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -207,7 +215,7 @@
     </url>
 
     <url>
-        <loc>https://minwan1.github.io/2017/04/22/2017-04-22-javascript-execution-context/</loc>
+        <loc>https://minwan1.github.io/2017/04/20/2017-04-20-Tomcat-Session-principle%20/</loc>
         <lastmod>2018-02-24T10:35:39.123Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -215,7 +223,7 @@
     </url>
 
     <url>
-        <loc>https://minwan1.github.io/2017/04/20/2017-04-20-Tomcat-Session-principle%20/</loc>
+        <loc>https://minwan1.github.io/2017/04/22/2017-04-22-javascript-execution-context/</loc>
         <lastmod>2018-02-24T10:35:39.123Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
