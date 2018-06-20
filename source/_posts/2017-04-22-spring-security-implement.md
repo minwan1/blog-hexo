@@ -6,7 +6,8 @@ subtitle:
 header-img:
 tags:
 - Spring
-- Security
+- Java
+
 ---
 
 # Spring Security 로그인 인증 구현

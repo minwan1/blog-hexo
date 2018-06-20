@@ -5,7 +5,8 @@ date: 2017-04-22
 subtitle:
 header-img:
 tags:
-- JavaScript
+- Javascript
+
 ---
 # 자바스크립트 Execution Context
 실행 가능한 코드(Executable Code) Global code, eval code, Function code 들을 만날때마다, 처음에는 Global context가 생성되고 그다음 실행가능한 코드들을 만날때마다 Execution context가 생성되고 그안에 또 Excution context들이 스택처럼 쌓인다. 각각의 Context는 언제나 1개의 변수 환경(Variable Environment), 1개의 Lexical Environment, 그리고 1개의 ThisBinding 속성, 총 3개의 부분으로 구성되 있다.

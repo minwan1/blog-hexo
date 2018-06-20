@@ -6,8 +6,8 @@ subtitle:
 header-img:
 tags:
 - Spring
-- Cache
-- Ehcache
+- Java
+
 ---
 
 ## Spring cache, ehcache 구현

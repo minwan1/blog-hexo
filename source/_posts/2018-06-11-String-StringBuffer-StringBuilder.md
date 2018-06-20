@@ -6,9 +6,6 @@ subtitle:
 header-img:
 tags:
 - Java
-- String
-- Stringbuffer
-- StringBuilder
 
 
 ---

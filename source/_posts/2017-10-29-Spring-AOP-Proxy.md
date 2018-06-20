@@ -6,8 +6,7 @@ subtitle:
 header-img:
 tags:
 - Spring
-- AOP
-- Proxy
+- Java
 ---
 
 

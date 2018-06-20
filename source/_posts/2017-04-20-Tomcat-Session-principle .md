@@ -6,8 +6,8 @@ subtitle:
 header-img:
 tags:
 - ETC
-- Tomcat
-- Session
+
+
 ---
 ## 톰켓 세션 동작원리 
 ### Cookie

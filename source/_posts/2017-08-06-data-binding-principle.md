@@ -6,7 +6,7 @@ subtitle:
 header-img:
 tags:
 - Angular
-- data-bind
+- Javascript
 ---
 
 # Angular 데이터 바인딩 원리

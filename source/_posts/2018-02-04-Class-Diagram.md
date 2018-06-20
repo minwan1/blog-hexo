@@ -6,8 +6,7 @@ subtitle:
 header-img:
 tags:
 - Java
-- ClassDiagram
-- UML
+- ETC
 ---
 
 

@@ -6,9 +6,8 @@ subtitle:
 header-img:
 tags:
 - Java
-- String
+- Spring
 - JPA
-- EntityManagerFactory, EntityManager, PersistenceContext란
 
 
 ---

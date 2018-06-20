@@ -6,12 +6,8 @@ subtitle:
 header-img:
 tags:
 - Spring
-- DispatcherServlet
-- ContextLoaderListener
-- Spring MVC
-- Spring 구조
-- 서블릿
-- Spring container
+- Java
+
 
 ---
 

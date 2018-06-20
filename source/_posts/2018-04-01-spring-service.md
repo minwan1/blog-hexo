@@ -6,12 +6,8 @@ subtitle:
 header-img:
 tags:
 - Spring
-- service
-- abstraction
-- 추상화
-- 토비
-- 서비스
-- interface
+- Java
+
 ---
 
 ## 스프링 기능 추상화 예제

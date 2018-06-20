@@ -104,8 +104,6 @@
                             
                               <a class="tag" href="/tags/#JVM" title="JVM">JVM</a>
                             
-                              <a class="tag" href="/tags/#JVM이란" title="JVM이란">JVM이란</a>
-                            
                         </div>
                         <h1>Java, JVM 이란</h1>
                         <h2 class="subheading"></h2>
@@ -240,6 +238,18 @@
 <li>오픈소스 자료가 풍부하다.</li>
 <li>자바프로그램은 안정적이다.</li>
 </ol>
+<h2><span id="java란">Java란</span></h2>
+<p>자바는 썬 마이크로 시스템즈에서 개발하여 1996년 1월 공식적으로 발표한 객체지향언어이다.</p>
+<p>기본적으로 자바프로그램들은 JVM위에서 동작한다. JVM 위에서 동작하기 위해서는 자바 바이트코드가 필요하다. 이 자바 바이트코드는 개발자에 의해서 작성된 자바 소스코드(.java)를 자바컴파일러(javac)로 변환 된 코드(.class)를 말한다. 아래 간단하게 자바프로그램 특징을 정리해보았다.</p>
+<h3><span id="자바-프로그램-특징">자바 프로그램 특징</span></h3>
+<ol>
+<li>자바프로그램은 운영체제에 독립적이다.</li>
+<li>객체지향 언어이기 때문에 유지보수가 용이하다.</li>
+<li>자동으로 메모리관리를 해준다.</li>
+<li>동적 로딩을 지원한다.</li>
+<li>오픈소스 자료가 풍부하다.</li>
+<li>자바프로그램은 안정적이다.</li>
+</ol>
 <h2><span id="jvm이란">JVM이란</span></h2>
 <p>JVM이란 JAVA Virtual Machine, 자바 가상 머신의 약자를 따서 주려 부르는 용어이다. JVM 역할은 자바 애플리케이션을 클래스 로더를 통해 읽어 들여 자바 API와 함께 실행하는 것이다. 그리고 JVM은 JAVA와 OS사이에서 중개자 역할을 수행하여 운영체제에 독립적인 플랫폼을 갖게 해준다.</p>
 <p>또한 JVM은 프로그램의 메모리 관리를 알아서 해준다. C프로그램 같은 경우 에는 직접 메모리할당을 해주고 해지해줘야한다. 하지만 JAVA에서는 JVM이 자동으로 Memory 관리를 해주는 장점이 있다.</p>
@@ -272,6 +282,9 @@
 <p><img src="https://i.imgur.com/zv717Hf.png" alt=""></p>
 </center>
 <center>그림 3</center>
+<p>아래그림은 실제 런타임시에 어떻게 클래스들과 객체 그리고 지역변수들이 어떻게 할당되는지에 대한 것을 그림으로 표현한것이다.</p>
+<p><img src="https://i.imgur.com/pAh5gIZ.png" alt=""></p>
+<center>그림 4</center>
 <h5><span id="pc-register">PC Register</span></h5>
 <p>레지스터는 각 스레드마다 하나씩 존재하며 스레드가 시작될 때 생성된다. PC레지스터는 Thread가 어떤 명령어로 실행되어야 할지에 대한 기록을 하는 부분으로 현재 수행중인 JVM명령의 주소를 갖는다.</p>
 <h5><span id="stack-area">Stack Area</span></h5>
@@ -285,8 +298,7 @@ JNI(Java Native Interface)를 통해 호출하는 C/C++등의 코드를 수행�
 <h5><span id="heap-area">Heap Area</span></h5>
 <p>Runtime 에 동적으로 할당되는 데이터가 저장되는 영역입니다. 예를들어 객체생, 배열등이 생성되었을 때 저장되는 공간이다. Heap에 할당된 데이터는 GC의 대상입니다. JVM 성능 등의 이슈에서 가장 많이 언급되는 공간이다.</p>
 <h5><span id="method-areaclass-area-code-area-static-area">Method Area(Class Area, Code Area, Static Area)</span></h5>
-<p>클래스 정보를 처음 메모리 공간에 올릴 때 초기화 되는 대상을 저장하기 위한 공간이다.<br>
-method area는 프로그램을 실행하기 위한 메타정보(class구조, method, constructor 등등) static 변수등을의 바이트 코드등을 저장하는 공간이다.</p>
+<p>메서드 영역은 모든 스레드가 공유하는 영역으로 JVM이 시작될 때 생성된다. JVM이 읽어 들인 각각의 클래스와 인터페이스에 대한 런타임 상수 풀, 필드와 메서드 코드, Static 변수, 메서드의 바이트코드 등을 보관한다.</p>
 <h6><span id="runtime-constant-pool">Runtime constant pool</span></h6>
 <p>Runtime constant pool 은 Method area 내부에 존재하는 영역으로, 각 클래스와 인터페이스의 상수뿐만 아니라, 메서드와 필드에 대한 모든 레퍼런스까지 담고 있는 테이블이다. 즉, 어떤 메서드나 필드를 참조할 때 JVM은 런타임 상수 풀을 통해 해당 메서드나 필드의 실제 메모리상 주소를 찾아서 참조하여 중복을 막는 역할을 한다.</p>
 <h4><span id="execution-engine">Execution Engine</span></h4>
@@ -313,6 +325,7 @@ method area는 프로그램을 실행하기 위한 메타정보(class구조, met
 <li><a href="https://medium.com/@lazysoul/jvm-%EC%9D%B4%EB%9E%80-c142b01571f2" target="_blank" rel="noopener">Lazysoul</a></li>
 <li><a href="http://jdm.kr/blog/188" target="_blank" rel="noopener">jdm</a></li>
 <li><a href="https://d2.naver.com/helloworld/1230" target="_blank" rel="noopener">D2</a></li>
+<li><a href="http://book.naver.com/bookdb/book_detail.nhn?bid=8589375" target="_blank" rel="noopener">이것이 자바다</a></li>
 </ul>
 
                 
@@ -357,7 +370,7 @@ method area는 프로그램을 실행하기 위한 메타정보(class구조, met
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Java란</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">자바 프로그램 특징</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">JVM이란</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">JVM 실행구조</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">JVM 실행과정</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">Java Compiler</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">Class Loader</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.3.</span> <span class="toc-nav-text">Runtime Data Areas</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.3.1.</span> <span class="toc-nav-text">PC Register</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.3.2.</span> <span class="toc-nav-text">Stack Area</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.3.3.</span> <span class="toc-nav-text">Native method stack area</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.3.4.</span> <span class="toc-nav-text">Heap Area</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.3.5.</span> <span class="toc-nav-text">Method Area(Class Area, Code Area, Static Area)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.3.5.1.</span> <span class="toc-nav-text">Runtime constant pool</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.4.</span> <span class="toc-nav-text">Execution Engine</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.5.</span> <span class="toc-nav-text">Native Method Interface(JNI)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.6.</span> <span class="toc-nav-text">Native Method Libraries</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Garbage Collection</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">마무리하며</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Java란</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">자바 프로그램 특징</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Java란</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">자바 프로그램 특징</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">JVM이란</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">JVM 실행구조</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">JVM 실행과정</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">Java Compiler</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">Class Loader</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.3.</span> <span class="toc-nav-text">Runtime Data Areas</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.3.1.</span> <span class="toc-nav-text">PC Register</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.3.2.</span> <span class="toc-nav-text">Stack Area</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.3.3.</span> <span class="toc-nav-text">Native method stack area</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.3.4.</span> <span class="toc-nav-text">Heap Area</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.3.5.</span> <span class="toc-nav-text">Method Area(Class Area, Code Area, Static Area)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.3.5.1.</span> <span class="toc-nav-text">Runtime constant pool</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.4.</span> <span class="toc-nav-text">Execution Engine</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.5.</span> <span class="toc-nav-text">Native Method Interface(JNI)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.6.</span> <span class="toc-nav-text">Native Method Libraries</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Garbage Collection</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">마무리하며</span></a></li></ol>
         
         </div>
       </aside>
@@ -380,8 +393,6 @@ method area는 프로그램을 실행하기 위한 메타정보(class구조, met
                           <a class="tag" href="/tags/#Java" title="Java">Java</a>
                         
                           <a class="tag" href="/tags/#JVM" title="JVM">JVM</a>
-                        
-                          <a class="tag" href="/tags/#JVM이란" title="JVM이란">JVM이란</a>
                         
                     </div>
                 </section>

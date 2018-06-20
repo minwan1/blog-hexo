@@ -6,10 +6,8 @@ subtitle:
 header-img:
 tags:
 - Spring
-- AOP
-- Proxy
-- AspectJ
-- Transaction
+- Java
+
 ---
 
 # AspectJ를 사용해서 같은 클래스내에도 새로운 트랜잭션 만들기

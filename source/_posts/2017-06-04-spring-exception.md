@@ -6,8 +6,8 @@ subtitle:
 header-img:
 tags:
 - Spring
-- Exception
-- Rest
+- Java
+
 ---
 
 ## 자바 Exception

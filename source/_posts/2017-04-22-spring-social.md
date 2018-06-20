@@ -6,7 +6,8 @@ subtitle:
 header-img:
 tags:
 - Spring
-- Social
+- Java
+
 ---
 # Spring-social-facebook 구현
 ## 내용

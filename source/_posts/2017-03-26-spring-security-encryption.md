@@ -6,7 +6,7 @@ subtitle:
 header-img:
 tags:
 - Spring
-- security
+- Java
 ---
 
 # Spring Security 암호화

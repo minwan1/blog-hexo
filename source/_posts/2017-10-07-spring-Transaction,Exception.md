@@ -6,8 +6,8 @@ subtitle:
 header-img:
 tags:
 - Spring
-- Exception
-- Transaction
+- Java
+
 ---
 
 # Spring에서 Exception 발생시 Trasaction 처리 주의

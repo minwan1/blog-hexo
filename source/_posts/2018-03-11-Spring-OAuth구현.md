@@ -5,12 +5,10 @@ date: 2018-03-11
 subtitle:
 header-img:
 tags:
-- OAuth
-- OAuth2
 - Spring
-- Security
-- Authorization
-- Authentication
+- Java
+- OAuth
+- ETC
 ---
 
 ## Spring Security OAuth2구현

@@ -6,8 +6,10 @@ date: 2017-04-08
 subtitle:
 header-img:
 tags:
-- ETC
-- JDBC
+
+- Spring
+- Java
+
 ---
 # Datasource, JdbcTemplate란
 ## 개요

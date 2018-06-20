@@ -6,8 +6,8 @@ subtitle:
 header-img:
 tags:
 - Spring
-- Container
-- Servlet
+- Java
+
 ---
 
 # 서블릿 컨테이너와 스프링 컨테이너

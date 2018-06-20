@@ -5,11 +5,6 @@ date: 2018-06-09
 subtitle:
 header-img:
 tags:
-- ASCII
-- Unicode
-- 아스키코드
-- 유니코드
-- UTF-8
 - ETC
 
 
