@@ -146,14 +146,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -255,6 +255,39 @@
 
 <div class="post-preview">
 
+    <a href="/2017/08/06/2017-08-06-data-binding-principle/">
+        <h2 class="post-title">
+            Angular 데이터 바인딩 원리
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Angular 데이터 바인딩 원리
+Angural는 angular context가 존재한다. angular context 내에는 digest loop가 존재하는것을 볼 수 있다. 이 digest loop는 watch list를 루프를 돌며 $watch를 통해 모델의 변경을 체크하고 변경되었을경우 뷰를 업데이트한다.
+
+Angular js에서 데이터 바인딩......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2017-08-06
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Javascript" title="Javascript">Javascript</a>
+            
+              <a href="/tags/#Angular" title="Angular">Angular</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2017/06/04/2017-06-04-spring-exception/">
         <h2 class="post-title">
             Spring-Rest-Exception
@@ -300,18 +333,20 @@
 
 <div class="post-preview">
 
-    <a href="/2017/04/22/2017-04-22-spring-security-implement/">
+    <a href="/2017/04/22/2017-04-22-spring-social/">
         <h2 class="post-title">
-            Spring Security 로그인 인증 구현
+            Spring-social-facebook 구현
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            Spring Security 로그인 인증 구현
-개요
-Spring Security에서 인증 사용할때 최상위 인터페이스 AuthenticationProviderManager Interface를 사용한다. 이인터페이스는 단순하게 아래와같이 정의 되어있다.
-123public interface authenticationManager&#123;  Authenti......
+            Spring-social-facebook 구현
+내용
+Spring social 로그인은 두가지 구현 방법이 있다. Connect Framework/Provider Sign In 방법이 있다.
+12"/connection/facebook" post"/signin/facebook" post
+
+Connect 방법은 타임라인에 글을 보거나 쓰는용도로 많이쓰인다.......
         </div>
     </a>
     
@@ -333,20 +368,18 @@ Spring Security에서 인증 사용할때 최상위 인터페이스 Authenticati
 
 <div class="post-preview">
 
-    <a href="/2017/04/22/2017-04-22-spring-social/">
+    <a href="/2017/04/22/2017-04-22-spring-security-implement/">
         <h2 class="post-title">
-            Spring-social-facebook 구현
+            Spring Security 로그인 인증 구현
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            Spring-social-facebook 구현
-내용
-Spring social 로그인은 두가지 구현 방법이 있다. Connect Framework/Provider Sign In 방법이 있다.
-12"/connection/facebook" post"/signin/facebook" post
-
-Connect 방법은 타임라인에 글을 보거나 쓰는용도로 많이쓰인다.......
+            Spring Security 로그인 인증 구현
+개요
+Spring Security에서 인증 사용할때 최상위 인터페이스 AuthenticationProviderManager Interface를 사용한다. 이인터페이스는 단순하게 아래와같이 정의 되어있다.
+123public interface authenticationManager&#123;  Authenti......
         </div>
     </a>
     
@@ -530,43 +563,6 @@ HTTP프로토콜은 비접속형 프로토콜, 매 접속마다 새로운 네트
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2017/03/18/hexo-theme-beantech/">
-        <h2 class="post-title">
-            [Hexo] Theme BeanTech
-        </h2>
-        <h3 class="post-subtitle">
-            This is hexo theme Demo.
-        </h3>
-        <div class="post-content-preview">
-            
-Ported Theme of Hux Blog, Thank Huxpro for designing such a flawless theme.
-This BeanTech theme created by YuHsuan modified from the original Porter Kaijun
-
-
-
-
-Usage
-
-I publish the whole project f......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Wan on
-            2017-03-18
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Blog" title="Blog">Blog</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -577,6 +573,10 @@ I publish the whole project f......
             <a href="/archives/2/">&larr; Newer Posts</a>
         </li>
     
+    
+        <li class="next">
+            <a href="/archives/4/">Older Posts &rarr;</a>
+        </li>
     
 </ul>
 
@@ -603,15 +603,15 @@ I publish the whole project f......
     <div class="tags">
         
             
+            <a href="/tags/#ETC" title="ETC" rel="8">ETC</a>
+            
+        
+            
             <a href="/tags/#Spring" title="Spring" rel="18">Spring</a>
             
         
             
-            <a href="/tags/#Java" title="Java" rel="22">Java</a>
-            
-        
-            
-            <a href="/tags/#ETC" title="ETC" rel="8">ETC</a>
+            <a href="/tags/#Java" title="Java" rel="23">Java</a>
             
         
             
@@ -627,9 +627,9 @@ I publish the whole project f......
             
         
             
-        
-            
             <a href="/tags/#Toby" title="Toby" rel="2">Toby</a>
+            
+        
             
         
             
@@ -690,6 +690,10 @@ I publish the whole project f......
     <ul>
       
         <li>
+          <a href="/2018/07/03/2018-07-03-collection/">Java Collection framework</a>
+        </li>
+      
+        <li>
           <a href="/2018/06/23/2018-06-23-운영체제란[OS-2]/">OS-2:컴퓨터 시스템 구조란?</a>
         </li>
       
@@ -703,10 +707,6 @@ I publish the whole project f......
       
         <li>
           <a href="/2018/06/14/2018-06-14-EntityManagerFactory, EntityManager, PersistenceContext란/">EntityManagerFactory, EntityManager, PersistenceContext란?</a>
-        </li>
-      
-        <li>
-          <a href="/2018/06/11/2018-06-11-String-StringBuffer-StringBuilder/">String, StringBuffer, StringBuilder 차이</a>
         </li>
       
     </ul>

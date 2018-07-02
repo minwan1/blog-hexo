@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://minwan1.github.io/2018/07/03/2018-07-03-collection/</loc>
+    
+    <lastmod>2018-07-02T16:02:17.065Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://minwan1.github.io/2017/04/08/2017-04-08-Datasource,JdbcTemplate/</loc>
     
     <lastmod>2018-06-23T18:42:32.561Z</lastmod>
@@ -219,14 +226,14 @@
   </url>
   
   <url>
-    <loc>https://minwan1.github.io/about/index.html</loc>
+    <loc>https://minwan1.github.io/archive/index.html</loc>
     
     <lastmod>2018-02-24T10:35:39.133Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://minwan1.github.io/archive/index.html</loc>
+    <loc>https://minwan1.github.io/about/index.html</loc>
     
     <lastmod>2018-02-24T10:35:39.133Z</lastmod>
     
