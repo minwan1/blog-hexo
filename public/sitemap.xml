@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://minwan1.github.io/2018/07/03/2018-07-03-equals,hashcode/</loc>
+    
+    <lastmod>2018-07-03T14:07:04.184Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://minwan1.github.io/2018/07/03/2018-07-03-collection/</loc>
     
-    <lastmod>2018-07-02T16:02:17.065Z</lastmod>
+    <lastmod>2018-07-03T12:23:21.830Z</lastmod>
     
   </url>
   
@@ -226,14 +233,14 @@
   </url>
   
   <url>
-    <loc>https://minwan1.github.io/archive/index.html</loc>
+    <loc>https://minwan1.github.io/about/index.html</loc>
     
     <lastmod>2018-02-24T10:35:39.133Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://minwan1.github.io/about/index.html</loc>
+    <loc>https://minwan1.github.io/archive/index.html</loc>
     
     <lastmod>2018-02-24T10:35:39.133Z</lastmod>
     

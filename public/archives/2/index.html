@@ -146,14 +146,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -220,6 +220,38 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2018/05/28/2018-05-28-spring-mvc/">
+        <h2 class="post-title">
+            Spring Web MVC 구조
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Spring Web MVC 구조
+MVC
+먼저 Spring Web MVC를 알기 전에 MVC 단어를 살펴보자. MVC(Model View Controller)란 비즈니스 규칙은 표현하는 도메인 모델(Model)과 프레젠테이션을 표현하는 View를 분리하기 위하여 양측 사이에 컨트롤러를 배치하도록 설계한 디자인 패턴이다. Spring Web MVC 모듈의......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2018-05-28
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#Java" title="Java">Java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -419,17 +451,17 @@ Class Diagram은 UML의 한종류이다. UML은 프로그램 설계를 표현하
 
 <div class="post-preview">
 
-    <a href="/2017/10/29/2017-10-29-Spring-AOP-Proxy/">
+    <a href="/2017/10/29/2017-10-29-Spring-Transaction,AspectJ-Compile/">
         <h2 class="post-title">
-            Spring-AOP, Proxy 란?
+            AspectJ를 사용해서 같은 클래스내에도 새로운 트랜잭션 만들기
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            Spring-AOP, Proxy 란?
-AOP란 ?
-AOP는 문제를 해결하기 위한 핵심 관심 사항과 전체에 적용되는 공통 모듈 사항을 기준으로 프로그래밍 함으로써 공통 모듈을 여러 코드에 쉽게 적용할 수 있도록 도와주는 역할을 합니다. AOP를 구현하는 다양한 방법이 존재하지만, 기본적인 개념은 아래 그림과 같이 공통 관심 사항 코드를 비즈니스 로직을 ......
+            AspectJ를 사용해서 같은 클래스내에도 새로운 트랜잭션 만들기
+
+스프링에서 트랜잭션을 처리하기 위해서는 일반적인 방법은 Proxy 클래스를 이용해 트랜잭션을 처리하는 것입니다. Spring AOP는 두 가지 Type의 Proxy를 지원하고 있습니다. 그 첫번째는 interface를 이용한 JDK Dynamic Proxy 기능을 이용하는 것이고, 두......
         </div>
     </a>
     
@@ -451,17 +483,17 @@ AOP는 문제를 해결하기 위한 핵심 관심 사항과 전체에 적용되
 
 <div class="post-preview">
 
-    <a href="/2017/10/29/2017-10-29-Spring-Transaction,AspectJ-Compile/">
+    <a href="/2017/10/29/2017-10-29-Spring-AOP-Proxy/">
         <h2 class="post-title">
-            AspectJ를 사용해서 같은 클래스내에도 새로운 트랜잭션 만들기
+            Spring-AOP, Proxy 란?
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            AspectJ를 사용해서 같은 클래스내에도 새로운 트랜잭션 만들기
-
-스프링에서 트랜잭션을 처리하기 위해서는 일반적인 방법은 Proxy 클래스를 이용해 트랜잭션을 처리하는 것입니다. Spring AOP는 두 가지 Type의 Proxy를 지원하고 있습니다. 그 첫번째는 interface를 이용한 JDK Dynamic Proxy 기능을 이용하는 것이고, 두......
+            Spring-AOP, Proxy 란?
+AOP란 ?
+AOP는 문제를 해결하기 위한 핵심 관심 사항과 전체에 적용되는 공통 모듈 사항을 기준으로 프로그래밍 함으로써 공통 모듈을 여러 코드에 쉽게 적용할 수 있도록 도와주는 역할을 합니다. AOP를 구현하는 다양한 방법이 존재하지만, 기본적인 개념은 아래 그림과 같이 공통 관심 사항 코드를 비즈니스 로직을 ......
         </div>
     </a>
     
@@ -500,41 +532,6 @@ AOP는 문제를 해결하기 위한 핵심 관심 사항과 전체에 적용되
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Wan on
             2017-10-08
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Spring" title="Spring">Spring</a>
-            
-              <a href="/tags/#Java" title="Java">Java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/10/07/2017-10-07-spring-Transaction,Exception/">
-        <h2 class="post-title">
-            Spring에서 Exception 발생시 Trasaction 처리 주의
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Spring에서 Exception 발생시 Trasaction 처리 주의
-
-자바에서는 총 3개의  Exception이 존재한다. Error, Checked Exception, Unchecked Exception
-
-Error
-첫째는 java.lang.Error 클래스의 서브 클래스들이다. 에러는 시스템에 뭔가 비정상적인 상황이 발생했을 경우에 사용된다. ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Wan on
-            2017-10-07
         </p>
         <div class="tags">
             
@@ -596,7 +593,7 @@ Error
             
         
             
-            <a href="/tags/#Java" title="Java" rel="23">Java</a>
+            <a href="/tags/#Java" title="Java" rel="24">Java</a>
             
         
             
@@ -612,13 +609,13 @@ Error
             
         
             
-            <a href="/tags/#Toby" title="Toby" rel="2">Toby</a>
-            
-        
-            
         
             
             <a href="/tags/#O/S" title="O/S" rel="2">O/S</a>
+            
+        
+            
+            <a href="/tags/#Toby" title="Toby" rel="2">Toby</a>
             
         
             
@@ -679,6 +676,10 @@ Error
         </li>
       
         <li>
+          <a href="/2018/07/03/2018-07-03-equals,hashcode/">Euqals, Hashcode 메소드에 대해 알아보자.</a>
+        </li>
+      
+        <li>
           <a href="/2018/06/23/2018-06-23-운영체제란[OS-2]/">OS-2:컴퓨터 시스템 구조란?</a>
         </li>
       
@@ -688,10 +689,6 @@ Error
       
         <li>
           <a href="/2018/06/19/2018-06-19-운영체제란[OS-1]/">OS-1:운영체제란?</a>
-        </li>
-      
-        <li>
-          <a href="/2018/06/14/2018-06-14-EntityManagerFactory, EntityManager, PersistenceContext란/">EntityManagerFactory, EntityManager, PersistenceContext란?</a>
         </li>
       
     </ul>
@@ -704,14 +701,6 @@ Error
 <h5>FRIENDS</h5>
 <ul class="list-inline">
 
-    
-        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
-    
-        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
-    
-        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
-    
-        <li><a href="#" target="_blank">It Helps SEO</a></li>
     
 </ul>
 
