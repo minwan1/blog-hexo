@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="WanBlog | 개발블로그">
+    <meta name="keyword"  content="WanBlog | 개발블로그">
+    <meta name="naver-site-verification" content="c80ae88a487472e88ec9170ad53578e81edad8b1"/>
+
+    <meta property="og:type" content="article">
+	  <meta property="og:title" content="Wan Blog">
+	  <meta property="og:url" content="https://minwan1.github.io/img/ironman-draw.png">
+	  <meta property="og:site_name" content="JavaScript/Java/Spring 개발 Blog">
+	  <meta property="og:description" content="WanBlog | 개발블로그">
+	  <meta property="og:image" content="https://minwan1.github.io/img/ironman-draw.png">
+	  <meta property="og:updated_time" content="2017-11-26T10:28:42.000Z">
+    
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Intellij로 효율적으로 개발하기(1) - Intellij Refactoring 기능 - WanBlog | 개발블로그
+        
+    </title>
+
+    <link rel="canonical" href="https://minwan1.github.io/2018/07/26/2018-07-26-intellij/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('null')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Java" title="Java">Java</a>
+                            
+                              <a class="tag" href="/tags/#Intellij" title="Intellij">Intellij</a>
+                            
+                        </div>
+                        <h1>Intellij로 효율적으로 개발하기(1) - Intellij Refactoring 기능</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Wan on
+                            2018-07-26
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Wan Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2><span id="intellij로-효율적으로-개발하기1-intellij-refactoring-기능">Intellij로 효율적으로 개발하기(1) - Intellij Refactoring 기능</span></h2>
+<p>개발을 하다보면 Intellij의 리팩토링을 정말 많이 사용합니다. 가장 대표적인 예가 클래스나 변수명 등 네이밍 변경 같은 경우가 될 수 있습니다. 만약 프로젝트 내에 모든 클래스를 변경하는데 손수 하나하나 네이밍을 변경하게 된다면 엄청난 시간을 허비해야 할 것입니다.</p>
+<p>하지만 Intelij에서 Rename과 같은 기능을 이용한다면 한 번에 효율적으로 모든 네이밍을 변경할 수 있습니다. 이러한 네이밍 변경과 같이 효율적인 리팩토링 기능이 어떤 것들이 있는지 알아보겠습니다.</p>
+<p>키보드는 맥 기준으로 설명해드리겠습니다. 윈도우같은경우 스크린샷안에 내용을 참조해주시면 감사하겠습니다.</p>
+<h3><span id="rename-기능">Rename 기능</span></h3>
+<p>변수, 클래스, 메소드명을 한 번에 변경해야할 때 사용되는 기능입니다.<br>
+단축키 : ⇧F6</p>
+<p><img src="https://media.giphy.com/media/2ZYF2T6oZhwRQSOc9U/giphy.gif" alt=""></p>
+<p>Calculator2라는 클래스명을 변경했습니다. 변경 후 뜨는 창은 현재 Calclator2클래스를 사용하고 있는 변수들도 변경할지 물어보는 창입니다. 같이 선택을 하게 되면 사용되는 변수들도 함께 Calculator로 변경이 됩니다.</p>
+<h3><span id="시그니처파라미터-변경-기능">시그니처(파라미터) 변경 기능</span></h3>
+<p>이기능은 클래스또는 메소드에 관련된 있는 있는 시그니처(파라미터)를 동시에 변경하고자할 때 사용되는 기능입니다. 예를들어 오버라이딩된 클래스, implements한 클래스, 호출되어지는 메소드 등이 대상입니다.</p>
+<p>단축키 : ⌘F6</p>
+<p><img src="https://media.giphy.com/media/g4M2XpYWQzyvZIKpog/giphy.gif" alt=""></p>
+<h3><span id="메소드-추출하기">메소드 추출하기</span></h3>
+<p>이기능은 기존 메소드내에 기능이 2개라고 생각할 때 다른 메소드로 분리해내는 기능입니다.<br>
+단축키 : ⌥⌘M<br>
+<img src="https://media.giphy.com/media/cI43RnYZYe4F3Crg5s/giphy.gif" alt=""><br>
+다음과 같이 계산하는 메소드가 있다고 했을때 여기에서 더하기 기능을 메소드로 빼내고싶다면 위와같이 추출해낼 수 있습니다.</p>
+<h3><span id="inline-기능-사용하기">inline 기능 사용하기</span></h3>
+<p>이기능은 두개의 라인이 하나의 라인으로 합쳐져도 무방할 때 사용하는 기능입니다. 예를들어 다음과같이 Calculator클래스의 add라는 함수를 사용했을 때 c라는 결과값이 나오게됩니다. 그리고 c를 return하여 할수를 종료합니다. 하지만 여기에서 바로 add(a,b)를 리턴할 수 있습니다. 이렇게 하나의 라인으로 합치려고할때 사용할 수 있습니다.</p>
+<p>단축키 : ⌥⌘N<br>
+<img src="https://media.giphy.com/media/8FGM8CmvLj1DzGgkUl/giphy.gif" alt=""></p>
+<h3><span id="변수-추출하기">변수 추출하기</span></h3>
+<p>다음 기능은 변수가 선언되지 않은 연산을 변수로 추출해낼 떄 사용하는 기능입니다.<br>
+단축키 : ⌥⌘V<br>
+<img src="https://media.giphy.com/media/3MfkF5HSKKDXtKJnkD/giphy.gif" alt=""></p>
+<h3><span id="필드-변수로-추출하기">필드 변수로 추출하기</span></h3>
+<p>다음기능은 로컬변수를 필드변수로 뽑아낼 때 사용하는 기능입니다.<br>
+단축키 : ⌥⌘F<br>
+<img src="https://media.giphy.com/media/3FlLs9iLtklaDrUdD2/giphy.gif" alt=""></p>
+<h3><span id="파라미터-추출하기">파라미터 추출하기</span></h3>
+<p>다음은 메소드나, 생성자에 있는 파라미터에 필드를 추가하고싶을 때 사용 하는 기능이다.</p>
+<p>단축키 : ⌥⌘P<br>
+<img src="https://media.giphy.com/media/1gTQTENa4OtKhwBnEz/giphy.gif" alt=""></p>
+<h3><span id="클래스-추출하기">클래스 추출하기</span></h3>
+<p>다음은 하나의 클래스의 기능이 너무커지거나 메소드의 기능이 너무 커질때 해당 기능을 클래스로 분리해내는 기능입니다.<br>
+단축키 : ⌃T -&gt; 9.Delegate<br>
+<img src="https://media.giphy.com/media/xUb9f91b5mCZlptTzd/giphy.gif" alt=""></p>
+<h3><span id="사용되지-않는-내용-삭제하기">사용되지 않는 내용 삭제하기</span></h3>
+<p>다음은 사용되지 않는 변수, 클래스, 메소드등 삭제할 때 해당 기능을 안전하게 제거하는 기능입니다. 그림과 같이 사용되지 않는 곳에가서 ⌥enter 클릭하게되면 Intellij에서 safe-delete를 제안해줍니다. Minus가 어디에서 호출되지는 않지만 Minus와 관련된 변수, 메소드가있는경우 스샷과 같이 Intellij에서 관련된것들도 같이 삭제할건지 물어보게됩니다. 이과정을 검토한후 삭제를 하게되면 안전하게 소스를 지우실 수 있습니다. 이기능을 이용하면 사용되지 않는 소스들을 깔끔하게 지우실 수 있습니다.<br>
+단축키 : ⌥enter -&gt; safe-delete<br>
+<img src="https://media.giphy.com/media/21S3x4GAh4XeHZDqZq/giphy.gif" alt=""></p>
+<h3><span id="t-enter-사용하기">⌃T, ⌥enter 사용하기</span></h3>
+<p>리팩토링 하려고 하는 대상으로 가셔서 ⌃T, ⌥enter 둘중 하나를 클릭하시면 좀더 많은 기능들의 intellij의 리팩토링을 이용하 실 수 있습니다. ⌃T는 입력하시면 Intellij에서 미리 목록화 해놓은 리팩토링 기능의 목록을 보실 수 있습니다. ⌥enter 같은 경우에는 Intellij에서 해당 소스를 파악하고 제안해주는 리팩토링 기능을 확인하실 수 있습니다. 물론 intellij에서 refactoring할 대상을 찾지 못한다면 제안 되는 리팩토링기능은 없을것입니다.</p>
+<p>참고</p>
+<ul>
+<li><a href="https://cheese10yun.github.io/intellij-refactoring/" target="_blank" rel="noopener">Yun-blog</a></li>
+<li><a href="https://www.jetbrains.com/" target="_blank" rel="noopener">Jetbrain</a></li>
+</ul>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/07/26/2018-07-26-spring-book-3/" data-toggle="tooltip" data-placement="top" title="온라인 서점 API 만들기로 살펴보는 Spring Boot OOP 3">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/07/26/2018-07-26-spring-book-2/" data-toggle="tooltip" data-placement="top" title="온라인 서점 API 만들기로 살펴보는 Spring Boot OOP 2">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Intellij로 효율적으로 개발하기(1) - Intellij Refactoring 기능</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Rename 기능</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">시그니처(파라미터) 변경 기능</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">메소드 추출하기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">inline 기능 사용하기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">변수 추출하기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">필드 변수로 추출하기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">파라미터 추출하기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.8.</span> <span class="toc-nav-text">클래스 추출하기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.9.</span> <span class="toc-nav-text">사용되지 않는 내용 삭제하기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.10.</span> <span class="toc-nav-text">⌃T, ⌥enter 사용하기</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Java" title="Java">Java</a>
+                        
+                          <a class="tag" href="/tags/#Intellij" title="Intellij">Intellij</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "https-minwan1-github-io";
+    var disqus_identifier = "https://minwan1.github.io/2018/07/26/2018-07-26-intellij/";
+    var disqus_url = "https://minwan1.github.io/2018/07/26/2018-07-26-intellij/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/Minwan1">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Wan 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://minwan1.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://minwan1.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
