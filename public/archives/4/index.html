@@ -223,24 +223,101 @@
 
 <div class="post-preview">
 
-    <a href="/2017/04/22/2017-04-22-spring-security-implement/">
+    <a href="/2017/08/06/2017-08-06-spring-remember-me/">
         <h2 class="post-title">
-            Spring Security 로그인 인증 구현
+            Spring-RememberMe
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            Spring Security 로그인 인증 구현
-개요
-Spring Security에서 인증 사용할때 최상위 인터페이스 AuthenticationProviderManager Interface를 사용한다. 이인터페이스는 단순하게 아래와같이 정의 되어있다.
-123public interface authenticationManager&#123;  Authenti......
+            Spring-RememberMe 구현
+
+일반적으로 우리는 브라우저를 닫는순간 세션이 끊기고 브라우저를 다시 켜게되면 로그인을 통해 세션을 연결해준다.하지만 rememberme 기능을 이용하면 브라우저를 열면 자동 로그인을 하게 된다.  일반적으로 브라우저로 쿠키를 보냄으로써 세션에 의해 쿠키가 발견되고 자동적으로 로그인이 일어날것이다. spring s......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Wan on
-            2017-04-22
+            2017-08-06
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#Java" title="Java">Java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/08/06/2017-08-06-data-binding-principle/">
+        <h2 class="post-title">
+            Angular 데이터 바인딩 원리
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Angular 데이터 바인딩 원리
+Angural는 angular context가 존재한다. angular context 내에는 digest loop가 존재하는것을 볼 수 있다. 이 digest loop는 watch list를 루프를 돌며 $watch를 통해 모델의 변경을 체크하고 변경되었을경우 뷰를 업데이트한다.
+
+Angular js에서 데이터 바인딩......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2017-08-06
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Javascript" title="Javascript">Javascript</a>
+            
+              <a href="/tags/#Angular" title="Angular">Angular</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/06/04/2017-06-04-spring-exception/">
+        <h2 class="post-title">
+            Spring-Rest-Exception
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            자바 Exception
+자바에서 크게 에러는 2가지가 존재한다.
+
+문법에러
+
+오타와같이 자바 구문에서 에러가나는 경우 이다. 이것은 컴파일시 에러로 발생으로 수 가능하다.
+
+
+실행에러
+
+실행 에러는 프로그램 실행시 상황에 따라 발생하는 오류이다.
+실행 에러안에서 크게 또 논리에러, 시스템에러, 예외사항으로 나뉘어진다.
+
+
+
+여기서 문법적인 에러는 컴파......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2017-06-04
         </p>
         <div class="tags">
             
@@ -270,6 +347,39 @@ Spring social 로그인은 두가지 구현 방법이 있다. Connect Framework/
 12"/connection/facebook" post"/signin/facebook" post
 
 Connect 방법은 타임라인에 글을 보거나 쓰는용도로 많이쓰인다.......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Wan on
+            2017-04-22
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#Java" title="Java">Java</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/04/22/2017-04-22-spring-security-implement/">
+        <h2 class="post-title">
+            Spring Security 로그인 인증 구현
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Spring Security 로그인 인증 구현
+개요
+Spring Security에서 인증 사용할때 최상위 인터페이스 AuthenticationProviderManager Interface를 사용한다. 이인터페이스는 단순하게 아래와같이 정의 되어있다.
+123public interface authenticationManager&#123;  Authenti......
         </div>
     </a>
     
@@ -453,43 +563,6 @@ HTTP프로토콜은 비접속형 프로토콜, 매 접속마다 새로운 네트
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2017/03/18/hexo-theme-beantech/">
-        <h2 class="post-title">
-            [Hexo] Theme BeanTech
-        </h2>
-        <h3 class="post-subtitle">
-            This is hexo theme Demo.
-        </h3>
-        <div class="post-content-preview">
-            
-Ported Theme of Hux Blog, Thank Huxpro for designing such a flawless theme.
-This BeanTech theme created by YuHsuan modified from the original Porter Kaijun
-
-
-
-
-Usage
-
-I publish the whole project f......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Wan on
-            2017-03-18
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Blog" title="Blog">Blog</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -500,6 +573,10 @@ I publish the whole project f......
             <a href="/archives/3/">&larr; Newer Posts</a>
         </li>
     
+    
+        <li class="next">
+            <a href="/archives/5/">Older Posts &rarr;</a>
+        </li>
     
 </ul>
 
@@ -526,19 +603,19 @@ I publish the whole project f......
     <div class="tags">
         
             
-            <a href="/tags/#Spring" title="Spring" rel="23">Spring</a>
+            <a href="/tags/#Spring" title="Spring" rel="24">Spring</a>
             
         
             
-            <a href="/tags/#Java" title="Java" rel="30">Java</a>
-            
-        
-            
-            <a href="/tags/#Javascript" title="Javascript" rel="2">Javascript</a>
+            <a href="/tags/#Java" title="Java" rel="32">Java</a>
             
         
             
             <a href="/tags/#ETC" title="ETC" rel="8">ETC</a>
+            
+        
+            
+            <a href="/tags/#Javascript" title="Javascript" rel="2">Javascript</a>
             
         
             
@@ -550,17 +627,19 @@ I publish the whole project f......
             
         
             
+            <a href="/tags/#Toby" title="Toby" rel="2">Toby</a>
+            
+        
+            
         
             
             <a href="/tags/#O/S" title="O/S" rel="2">O/S</a>
             
         
             
-            <a href="/tags/#Toby" title="Toby" rel="2">Toby</a>
-            
         
             
-            <a href="/tags/#온라인 서점 API 만들기로 살펴보는 Spring Boot OOP" title="온라인 서점 API 만들기로 살펴보는 Spring Boot OOP" rel="5">온라인 서점 API 만들기로 살펴보는 Spring Boot OOP</a>
+            <a href="/tags/#온라인 서점 API 만들기로 살펴보는 Spring Boot OOP" title="온라인 서점 API 만들기로 살펴보는 Spring Boot OOP" rel="6">온라인 서점 API 만들기로 살펴보는 Spring Boot OOP</a>
             
         
             
@@ -619,7 +698,15 @@ I publish the whole project f......
     <ul>
       
         <li>
-          <a href="/2018/08/01/2018-07-26-spring-book-4/">온라인 서점 API 만들기로 살펴보는 Spring Boot OOP 4</a>
+          <a href="/2018/10/01/2018-09-03-network-network-divice/">Network-1:허브, 스위치, 공유기, 라우터란 ?</a>
+        </li>
+      
+        <li>
+          <a href="/2018/09/23/2018-09-03-java-reg/">정규식이란 ? - Java</a>
+        </li>
+      
+        <li>
+          <a href="/2018/08/26/2018-08-26-spring-book-6/">온라인 서점 API 만들기로 살펴보는 Spring Boot OOP 6</a>
         </li>
       
         <li>
@@ -627,15 +714,7 @@ I publish the whole project f......
         </li>
       
         <li>
-          <a href="/2018/07/26/2018-07-26-spring-book-2/">온라인 서점 API 만들기로 살펴보는 Spring Boot OOP 2</a>
-        </li>
-      
-        <li>
-          <a href="/2018/07/26/2018-07-26-intellij/">Intellij로 효율적으로 개발하기(1) - Intellij Refactoring 기능</a>
-        </li>
-      
-        <li>
-          <a href="/2018/07/26/2018-07-26-spring-book-3/">온라인 서점 API 만들기로 살펴보는 Spring Boot OOP 3</a>
+          <a href="/2018/08/01/2018-07-26-spring-book-4/">온라인 서점 API 만들기로 살펴보는 Spring Boot OOP 4</a>
         </li>
       
     </ul>
