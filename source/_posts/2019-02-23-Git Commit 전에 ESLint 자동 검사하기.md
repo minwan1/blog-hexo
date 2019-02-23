@@ -6,9 +6,6 @@ subtitle: Eslint
 header-img:
 tags:
 - JavaScript
-
-
-
 ---
 
 # Git Commit 전에 ESLint 자동 검사 하기

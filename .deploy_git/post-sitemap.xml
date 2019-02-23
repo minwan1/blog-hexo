@@ -7,8 +7,8 @@
     </url>
 
     <url>
-        <loc>https://minwan1.github.io/2019/02/23/2019-02-23-Git%20Commit%20%EC%A0%84%EC%97%90%20ESLint%20%EC%9E%90%EB%8F%99%20%EA%B2%80%EC%82%AC%ED%95%98%EA%B8%B0/</loc>
-        <lastmod>2019-02-23T14:36:34.261Z</lastmod>
+        <loc>https://minwan1.github.io/2019/02/23/2019-02-23-spring-book-7/</loc>
+        <lastmod>2019-02-23T14:50:29.243Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -16,7 +16,15 @@
 
     <url>
         <loc>https://minwan1.github.io/2019/01/28/2019-01-28-HandlerMethodArgumentResolver/</loc>
-        <lastmod>2019-02-23T14:29:37.848Z</lastmod>
+        <lastmod>2019-02-23T14:44:14.453Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://minwan1.github.io/2019/02/23/2019-02-23-Git%20Commit%20%EC%A0%84%EC%97%90%20ESLint%20%EC%9E%90%EB%8F%99%20%EA%B2%80%EC%82%AC%ED%95%98%EA%B8%B0/</loc>
+        <lastmod>2019-02-23T14:37:26.069Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
