@@ -2,14 +2,14 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="WanBlog | 개발블로그">
-    <meta name="keyword"  content="WanBlog | 개발블로그">
-    <meta name="naver-site-verification" content="c80ae88a487472e88ec9170ad53578e81edad8b1"/>
+    <meta name="keyword" content="WanBlog | 개발블로그">
+    <meta name="naver-site-verification" content="c80ae88a487472e88ec9170ad53578e81edad8b1">
 
     <meta property="og:type" content="article">
 	  <meta property="og:title" content="Wan Blog">
@@ -156,14 +156,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -226,44 +226,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="jdbc-connection-connectionpool-datasource-jdbctemplate이란">JDBC, Connection, ConnectionPool, Datasource, JdbcTemplate이란 ?</span></h2>
-<p>먼저 위 타이틀을 알아보기전에 아래소스를 보자. 왜 위 API들이 우리에게 필요한지 알아보자. 우리가 자바를 사용해서 디비에서 List형태의 데이터를 불러오려면 아래와같이 복잡한 소스를 작성해야한다. 하지만 자바와 스프링에서 제공해주는 API DataSource, JdbcTemplate등을 이용하면 훨씬 더 깔끔하고 안정적이 구조로 데이터를 조회할 수 있다. 먼저 DataSource와 JdbcTemplate을 알아보기전에 자바에서 어떻게 데이터베이스에 접근하는지 알아볼것이다.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">jdbcTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Connection con = <span class="keyword">null</span>;</span><br><span class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">			con = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost"</span>,<span class="string">"root"</span>, <span class="string">"1234"</span>);</span><br><span class="line"></span><br><span class="line">			java.sql.Statement st = <span class="keyword">null</span>;</span><br><span class="line">			ResultSet rs = <span class="keyword">null</span>;</span><br><span class="line">			st = con.createStatement();</span><br><span class="line">			rs = st.executeQuery(<span class="string">"SHOW DATABASES"</span>);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (st.execute(<span class="string">"SHOW DATABASES"</span>)) &#123;</span><br><span class="line">				rs = st.getResultSet();</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">while</span> (rs.next()) &#123;</span><br><span class="line">				String str = rs.getNString(<span class="number">1</span>);</span><br><span class="line">				System.out.println(str);</span><br><span class="line">			&#125;</span><br><span class="line">			rs.close;</span><br><span class="line">			st.close;</span><br><span class="line">			con.close;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException sqex) &#123;</span><br><span class="line">			System.out.println(<span class="string">"SQLException: "</span> + sqex.getMessage());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3><span id="jdbc란">JDBC란</span></h3>
-<p>JDBC는 Java Database Connectivity의 약어로 자바 언어로 다양한 종류의 관계형 데이터베이스에 접속하고 SQL문을 수행하여 처리하고자할때 사용되는 표준 SQL 인터페이스 API이다. 데이터베이스마다 연결방식과 통식 규격이 따로 있다. 프로그램을 데이터베이스에서 제공하는 방법으로 연결한다면 해당 데이터베이스와 관련된 기술적 내용을 자세히 배워야한다. 그리고 데이터베이스를 변경한다면 많은 변경을 해줘야한다.하지만 이론적으로는 각 DBMS에 맞는 JDBC를 받아주게되면 쉽게 DBMS를 변경할 수 있게 된다. 아래그림은 JDBC를 이용해 데이터베이스를 접근하는 순서를 표현하는 그림이다.</p>
-<p><img src="https://i.imgur.com/dbpdf3P.png" alt=""></p>
-<h3><span id="connection-pool이란">Connection Pool이란?</span></h3>
-<p>Connection Pool 이란 클라이언트의 요청 시점에 Connection을 연결하는 것이 아니라 미리 일정수의 Connection 을 만들어 놓고 필요한 어플리케이션에 전달하여 이용하도록 하는 방법이다. Container 구동 시 일정수의 Connection 객체를 생성하게 되며 클라이언트의 요청에 의해 Application 이 DBMS 작업을 수행해야 하면 Connection Pool 에서 Connection 객체를 받아와 작업을 진행하며 작업이 끝나면 다시 Connection Pool 에 반납하는 과정을 거친다.</p>
-<h3><span id="connection이란">Connection이란?</span></h3>
-<p>DriverManager.getConnection()은 실제 자바프로그램과 데이터베이스를 네트워크상에서 연결을 해주는 메소드이다. 연결에 성공하면 DB와 연결 상태를 Connection 객체로 표현하여 반환한다. Connection은 아래의 그림과 같이 네트워크상의 연결 자체를 의미한다. 자바프로그램과 DB사이의 길로 볼 수 있다. 보통 Connection하나당 트랜잭션 하나를 관리한다. 트랜잭션은 하나 이상의 쿼리에서 동일한 Connection 객체를 공유하는 것을 뜻한다. Mybatis의 SqlSession, Hibernate에 TransactionManager등의 Close가 이루어지면 Connection을 ConnectionPool에 반납하게 된다.<br>
-<img src="https://i.imgur.com/OWPyJNm.png" alt=""></p>
-<h3><span id="statement">Statement</span></h3>
-<p>Connection으로 길을 만들었으면 DB쪽으로 SQL문을 보내야고 그결과값을 받아야하는데 이역할을 하는것이 Statement객체이다.</p>
-<h3><span id="datasource란">Datasource란?</span></h3>
-<p><strong><em>javax.sql.DataSource</em></strong> 는 인터페이스는 ConnectionPool을 관리하는 목적으로 사용되는 객체로 Application에서는 이 Datasource 인터페이스를 통해서 Connection을 얻어오고 반납하는 등의 작업을 구현해야하는 인터페이스이다. Connection Pool에는 여러개의 Connection 객체가 생성되어 운용되어진다. 각각을 직접 웹 어플리케이션에서 이용하면 체계적인 관리가 힘들게 되므로 DataSource라는 개념을 도입하여 사용하고 있다. DataSource 인터페이스는 Connection pool을 어플리케이션단에서 어떻게 관리할지를 구현해야하는 인터페이스이다.</p>
-<h3><span id="jdbctemplate란">JdbcTemplate란?</span></h3>
-<p>Statement 처리를 위해서 Spring에서 JDBC를 지원하는데 그것이 JdbcTemplate 클래스, JdbcTemplate 클래스는 setDataSource()가 있어서 생성자 방식으로 Datasource를 지정가능하다. 아래는 Mybatis를이용한 간단한 JdbcTemplate예제이다.</p>
-<h2><span id="contextxml에서-빈등록하기">Context.xml에서 빈등록하기</span></h2>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">"classpath:database.properties"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 인프라빈 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DriverManagerDataSource"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> <span class="attr">value</span>=<span class="string">"$&#123;db.driver&#125;"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"$&#123;db.url&#125;"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"$&#123;db.id&#125;"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;db.pw&#125;"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 인프라빈 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"jdbcTemplate"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.core.JdbcTemplate"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">&lt;!-- autowired를 사용해도되고, 그냥 이런식으로 주입해서 써도 무방함 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"memberDao"</span> <span class="attr">class</span>=<span class="string">"dao.MemberDaoImpl"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcTemplate"</span> <span class="attr">ref</span>=<span class="string">"jdbcTemplate"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h4><span id="memberdaoclass-안에서-동작하는-jdbctemplate">MemberDaoClass 안에서 동작하는 JdbcTemplate</span></h4>
-<ul>
-<li>datasource가 존재하지않는다면 드라이버를 로드하고 커넥션풀등을 생성을해야하는데 이러한 불필요한 행동들을 없애준다.</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">string sql =<span class="string">"SELECT * FROM member"</span>;</span><br><span class="line">        List&lt;Member&gt; list = jdbcTemplate.query(sql,<span class="keyword">new</span> MemberRowMapper())</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MemberRowMapper</span> <span class="keyword">implements</span> <span class="title">RowMapper</span>&lt;<span class="title">Member</span>&gt;</span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Member <span class="title">mapRow</span><span class="params">(ResultSet rs, <span class="keyword">int</span> arg1)</span> <span class="keyword">throws</span> SQLException</span>&#123;</span><br><span class="line">            Member member = <span class="keyword">new</span> Member();</span><br><span class="line">            member.setId(rs.getString(<span class="string">"id"</span>));</span><br><span class="line">            member.setPw(rs.getString(<span class="string">"pw"</span>));</span><br><span class="line">            <span class="keyword">return</span> member;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h4><span id="mapper가-필요한이유">Mapper가 필요한이유</span></h4>
-<p>query의 결과가 list가 아닌 resultSet이기 때문에 resultSet과 list<member>를 mapping시키는 역할을 BeanPropertyRowMapper 가 수행한다. JDBC의 resultSet (table 행 list)로부터 java의 List로(객체의 list) 한 행씩 맵핑 이전까지 while(rs.next(){}를 사용해서 직접 해줬던 작업이다.</member></p>
-<h4><span id="mybatis에서는-이러한-mapper-설정없이-sqlsession이-이러한처리를-해준다">Mybatis에서는 이러한 mapper 설정없이 sqlsession이 이러한처리를 해준다.</span></h4>
-<p>e.g.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Member&gt; <span class="title">selectAll</span><span class="params">()</span></span>&#123;</span><br><span class="line">        SqlSession session = sqlSessionFactory.openSession();</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> session.selectList(<span class="string">"dao.deptMapper.selectAll"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span></span><br><span class="line">        &#123;</span><br><span class="line">            session.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>바로 Mapper없이 List을 반환해준다.</p>
-<p>참고</p>
-<ul>
-<li><a href="http://choong0121.tistory.com/entry/DataSource-%EB%9E%80" target="_blank" rel="noopener">내일의 나를 만드는 방법</a></li>
-<li><a href="http://chocobeans.tistory.com/entry/spring-JDBC-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0" target="_blank" rel="noopener">keep moving keep living</a></li>
-<li><a href="http://ra2kstar.tistory.com/134" target="_blank" rel="noopener">초보개발자 이야기.</a></li>
-<li><a href="http://www.yes24.com/24/goods/37235901" target="_blank" rel="noopener">처음 해보는 Servlet &amp; JSP 웹 프로그래밍</a></li>
-</ul>
+                <p>블로그 <a href="https://wan-blog.tistory.com/" target="_blank" rel="noopener">https://wan-blog.tistory.com/</a> 이전하였습니다. 블로그에 접속하셔서 오른쪽 상단에 검색을 이용해 글제목을 검색해주시면 감사하겠습니다.</p>
 
                 
 
@@ -307,7 +270,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">JDBC, Connection, ConnectionPool, Datasource, JdbcTemplate이란 ?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">JDBC란</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Connection Pool이란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Connection이란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Statement</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">Datasource란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">JdbcTemplate란?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Context.xml에서 빈등록하기</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.0.1.</span> <span class="toc-nav-text">MemberDaoClass 안에서 동작하는 JdbcTemplate</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.0.2.</span> <span class="toc-nav-text">Mapper가 필요한이유</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.0.3.</span> <span class="toc-nav-text">Mybatis에서는 이러한 mapper 설정없이 sqlsession이 이러한처리를 해준다.</span></a></li></ol></li></ol></li></ol>
+          <ol class="nav">none</ol>
         
         </div>
       </aside>
@@ -436,7 +399,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Wan 2019 
+                    Copyright &copy; Wan 2020 
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">

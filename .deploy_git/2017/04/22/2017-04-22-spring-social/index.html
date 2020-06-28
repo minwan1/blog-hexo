@@ -2,14 +2,14 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="WanBlog | 개발블로그">
-    <meta name="keyword"  content="WanBlog | 개발블로그">
-    <meta name="naver-site-verification" content="c80ae88a487472e88ec9170ad53578e81edad8b1"/>
+    <meta name="keyword" content="WanBlog | 개발블로그">
+    <meta name="naver-site-verification" content="c80ae88a487472e88ec9170ad53578e81edad8b1">
 
     <meta property="og:type" content="article">
 	  <meta property="og:title" content="Wan Blog">
@@ -156,14 +156,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -226,51 +226,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="spring-social-facebook-구현">Spring-social-facebook 구현</span></h1>
-<h2><span id="내용">내용</span></h2>
-<p>Spring social 로그인은 두가지 구현 방법이 있다. Connect Framework/Provider Sign In 방법이 있다.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;/connection/facebook&quot; post</span><br><span class="line">&quot;/signin/facebook&quot; post</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Connect 방법은 타임라인에 글을 보거나 쓰는용도로 많이쓰인다.</li>
-<li>signin은 일반적으로 로그인을 구현할때 많이 사용된다.</li>
-</ul>
-<p>지금 구현하려는 방식은 signin방식이다.<br>
-먼저 signin방식을 사용하기위해서 ProviderSignInController을 알아야한다.<br>
-ProviderSignInController는 컨트롤러로 구성되어있다. /signin/{provider} (provider는 facebook/twitter etc)<br>
-예를들어 /signin/facebook을 보내주게되면 컨트롤러에서 facebook에 맞는 인증처리 작업을 수행하게된다.</p>
-<p>그리고 Spring social에서 지정해준 table을 등록해줘야한다.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> UserConnection (userId <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">	providerId <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">	providerUserId <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">	<span class="keyword">rank</span> <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">	displayName <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">	profileUrl <span class="built_in">varchar</span>(<span class="number">512</span>),</span><br><span class="line">	imageUrl <span class="built_in">varchar</span>(<span class="number">512</span>),</span><br><span class="line">	accessToken <span class="built_in">varchar</span>(<span class="number">512</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">	secret <span class="built_in">varchar</span>(<span class="number">512</span>),</span><br><span class="line">	refreshToken <span class="built_in">varchar</span>(<span class="number">512</span>),</span><br><span class="line">	expireTime <span class="built_in">bigint</span>,</span><br><span class="line">	primary <span class="keyword">key</span> (userId, providerId, providerUserId));</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">unique</span> <span class="keyword">index</span> UserConnectionRank <span class="keyword">on</span> UserConnection(userId, providerId, <span class="keyword">rank</span>);</span><br></pre></td></tr></table></figure>
-<h3><span id="socialconfigureradaptersocialconfigurer">SocialConfigurerAdapter,SocialConfigurer</span></h3>
-<p>spring social 기본 설정을 해주는 클래스를 구현해줘야한다. SocialConfigurerAdapter 추상클래스를 extends해서 사용해도 되고 SocialConfigurer interface를 구현해도 무방하다.</p>
-<h3><span id="connectionsignup">ConnectionSignUp</span></h3>
-<p>이 interface는 유저가 처음 로그인할때 어플리케이션(자신이 만들고있는)에 회원가입을 구현할수있는 곳이다. provider에서 로그인이 성공적으로 진행하면 Userconnection테이블에서 현재 페이스북으로 가입한유저가있는지 providerId,providerUserId 을통해 검색한다. 만약 Userconnection테이블에서 유저 정보가 없다면 ConnectionSignUp의 execute(Connection&lt;?&gt; connection) 메소드가 호출된다. 이메소드에서 provider에서 제공해주는 유저의 정보을 얻어 올수 있다. 첫번째 로그인이후에는 userconnection테이블에서 유저을 찾게되면 이메소드는 더이상 호출되지 않는다.</p>
-<h3><span id="signinadapter">SignInAdapter</span></h3>
-<p>provider측에서 인증이 끝난후에 userconnection에 정보가 저장된후에 구현해야할 인터페이스이다. SignInAdapter의 signIn메소드는 어플리케이션의 로그인 로직을 구현하여 로그인 기능을 구현하면된다.</p>
-<h3><span id="메이븐-추가">메이븐 추가</span></h3>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Spring Social --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.social<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-social-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Spring Social Facebook --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.social<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-social-facebook<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3><span id="socialconfigureradapter-추상클래스-구현">SocialConfigurerAdapter 추상클래스 구현</span></h3>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SocialConfig</span> <span class="keyword">extends</span> <span class="title">SocialConfigurerAdapter</span></span>&#123;</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> Environment environment;</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> DataSource dataSource;</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> UserRepository userRepository;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> SignInAdapter <span class="title">signInAdapter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> PostSocialSignInAdapter(userRepository);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> UsersConnectionRepository <span class="title">getUsersConnectionRepository</span><span class="params">(ConnectionFactoryLocator connectionFactoryLocator)</span> </span>&#123;</span><br><span class="line">		JdbcUsersConnectionRepository repository = <span class="keyword">new</span> JdbcUsersConnectionRepository(dataSource,</span><br><span class="line">				connectionFactoryLocator, Encryptors.text(environment.getProperty(<span class="string">"social.security.encryptPassword"</span>),</span><br><span class="line">						environment.getProperty(<span class="string">"social.security.encryptSalt"</span>)));</span><br><span class="line">		repository.setConnectionSignUp(<span class="keyword">new</span> SocialImplicitSignUp(userRepository));</span><br><span class="line">		<span class="keyword">return</span> repository;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>JdbcUsersConnectionRepository는 Userconnection테이블과 연결되어지는 spring social로부터 사용되어지는 DAO이다. 어플리케이션이 사용하는 데이터베이스를 연결하려면 필수로 datasource 등을 생성자로 넣어줘야한다. 첫번쨰로는 datasource을 2번째인자로는 provider들을 관리해주는 connectionFactoryLocator을 넣는다. 3번째로는 암호화방식을 넣어준다. Encryptors.noOpText()로 설정하게되면 평문으로 디비에 정보가 저장된다. 만약 provider들을 더 추가하고싶은면 addConnectionFactories 메소드를 추가해서 오버라이딩해서 provider들을 추가해주면 된다. 솔직히 전체적인 로직을 추가하면 provider들을 추가하는건 어렵지않다.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">findUserIdsWithConnection</span><span class="params">(Connection&lt;?&gt; connection)</span> </span>&#123;</span><br><span class="line">  ConnectionKey key = connection.getKey();</span><br><span class="line">  List&lt;String&gt; localUserIds = jdbcTemplate.queryForList(<span class="string">"select userId from "</span> + tablePrefix + <span class="string">"UserConnection where providerId = ? and providerUserId = ?"</span>, String.class, key.getProviderId(), key.getProviderUserId());</span><br><span class="line">  <span class="keyword">if</span> (localUserIds.size() == <span class="number">0</span> &amp;&amp; connectionSignUp != <span class="keyword">null</span>) &#123;</span><br><span class="line">    String newUserId = connectionSignUp.execute(connection);</span><br><span class="line">    <span class="keyword">if</span> (newUserId != <span class="keyword">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      createConnectionRepository(newUserId).addConnection(connection);</span><br><span class="line">      <span class="keyword">return</span> Arrays.asList(newUserId);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> localUserIds;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>위는 spring-social 라이브러리 내부인데 providerId = ? and providerUserId = ? 을 통해 userconnection에서 유저정보를 불러와 유저정보가없다면 connectionSignUp을 타게된다. 그렇게되면 아래의 클래스가 실행된다. 그리고 provider에서 보내준 유저정보를 통해 어플리케이션의 회원가입처리를 해준다. 그다음 return 해준값으로 userconnection테이블에 userid에 값이 저장 된다.</p>
-<h3><span id="connectionsignup-인터페이스-구현">ConnectionSignUp 인터페이스 구현</span></h3>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SocialImplicitSignUp</span> <span class="keyword">implements</span> <span class="title">ConnectionSignUp</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> UserRepository userRepository;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">SocialImplicitSignUp</span><span class="params">(UserRepository userRepository)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.userRepository = userRepository;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">(Connection&lt;?&gt; connection)</span> </span>&#123;</span><br><span class="line">		UserProfile profile = connection.fetchUserProfile();</span><br><span class="line">		User user = <span class="keyword">new</span> User(profile.getFirstName() + <span class="string">" "</span> + profile.getLastName(), profile.getEmail(), <span class="string">"N/A"</span>,</span><br><span class="line">				connection.getImageUrl());</span><br><span class="line">		userRepository.save(user);</span><br><span class="line">		<span class="keyword">return</span> user.getEmail();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>회원가입처리가 끝나고 밑에 로그인 어댑터를 실행하게된다. security를 사용하면 security로그인처리를 하면되고, 아니라면 아래와같이 로그인 처리를 하면된다.</p>
-<h3><span id="signinadapter-인터페이스-구현">SignInAdapter 인터페이스 구현</span></h3>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PostSocialSignInAdapter</span> <span class="keyword">implements</span> <span class="title">SignInAdapter</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> UserRepository userRepository;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Inject</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">PostSocialSignInAdapter</span><span class="params">(UserRepository userRepository)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.userRepository = userRepository;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">signIn</span><span class="params">(String localUserId, Connection&lt;?&gt; connection, NativeWebRequest request)</span> </span>&#123;</span><br><span class="line">		UserProfile profile = connection.fetchUserProfile();</span><br><span class="line">		User user = userRepository.findByEmail(profile.getEmail());</span><br><span class="line">		HttpServletRequest req = ((ServletWebRequest) request).getRequest();</span><br><span class="line">		req.getSession().setAttribute(<span class="string">"loggedUser"</span>, user);</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"/"</span>; <span class="comment">// will return to postSignInUrl 로그인한이후에 이동될 사이트인듯</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>예제에서는 아래의 테이블도 추가해줘야한다.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`user`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`email`</span> <span class="built_in">varchar</span>(<span class="number">128</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">128</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`password`</span> <span class="built_in">varchar</span>(<span class="number">64</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`thumbnail_url`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">7</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
-<h2><span id="결론">결론</span></h2>
-<ol>
-<li>SocialConfigurerAdapter을 통해 기본 spring-social 설정</li>
-<li>ConnectionSignUp 회원가입 구현</li>
-<li>SignInAdapter 웹어플리케이션 로그인 구현</li>
-</ol>
-<p><a href="https://github.com/minwan1/Spring-social-facebook" target="_blank" rel="noopener">깃허브 예제 소스</a></p>
-<p>참고<br></p>
-<ul>
-<li><a href="http://javacents.com/adding-social-sign-in-to-a-spring-boot-app/" target="_blank" rel="noopener">JavaCents</a><br></li>
-</ul>
+                <p>블로그 <a href="https://wan-blog.tistory.com/" target="_blank" rel="noopener">https://wan-blog.tistory.com/</a> 이전하였습니다. 블로그에 접속하셔서 오른쪽 상단에 검색을 이용해 글제목을 검색해주시면 감사하겠습니다.</p>
 
                 
 
@@ -279,7 +235,7 @@ ProviderSignInController는 컨트롤러로 구성되어있다. /signin/{provide
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2017/04/22/2017-04-22-javascript-execution-context/" data-toggle="tooltip" data-placement="top" title="자바스크립트 Execution Context">&larr; Previous Post</a>
+                            <a href="/2017/06/04/2017-06-04-spring-exception/" data-toggle="tooltip" data-placement="top" title="Spring-Rest-Exception">&larr; Previous Post</a>
                         </li>
                     
                     
@@ -314,7 +270,7 @@ ProviderSignInController는 컨트롤러로 구성되어있다. /signin/{provide
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Spring-social-facebook 구현</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">내용</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">SocialConfigurerAdapter,SocialConfigurer</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">ConnectionSignUp</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.3.</span> <span class="toc-nav-text">SignInAdapter</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.4.</span> <span class="toc-nav-text">메이븐 추가</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.5.</span> <span class="toc-nav-text">SocialConfigurerAdapter 추상클래스 구현</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.6.</span> <span class="toc-nav-text">ConnectionSignUp 인터페이스 구현</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.7.</span> <span class="toc-nav-text">SignInAdapter 인터페이스 구현</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">결론</span></a></li></ol></li></ol>
+          <ol class="nav">none</ol>
         
         </div>
       </aside>
@@ -443,7 +399,7 @@ ProviderSignInController는 컨트롤러로 구성되어있다. /signin/{provide
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Wan 2019 
+                    Copyright &copy; Wan 2020 
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">

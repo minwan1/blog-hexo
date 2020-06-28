@@ -2,14 +2,14 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="WanBlog | 개발블로그">
-    <meta name="keyword"  content="WanBlog | 개발블로그">
-    <meta name="naver-site-verification" content="c80ae88a487472e88ec9170ad53578e81edad8b1"/>
+    <meta name="keyword" content="WanBlog | 개발블로그">
+    <meta name="naver-site-verification" content="c80ae88a487472e88ec9170ad53578e81edad8b1">
 
     <meta property="og:type" content="article">
 	  <meta property="og:title" content="Wan Blog">
@@ -156,14 +156,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -226,65 +226,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="서블릿-컨테이너와-스프링-컨테이너">서블릿 컨테이너와 스프링 컨테이너</span></h1>
-<h2><span id="서블릿-컨테이너">서블릿 컨테이너</span></h2>
-<p>서블릿 컨테이너는 개발자가 웹서버와 통신하기 위하여 소켓을 생성하고, 특정 포트에 리스닝하고, 스트림을 생성하는 등의 복잡한 일들을 할 필요가 없게 해준다. 컨테이너는 servlet의 생성부터 소멸까지의 일련의 과정(Lifer Cycle)을 관리한다. 서블릿 컨테이너는 요청이 들어올 때마다 새로운 자바 스레드를 만든다. 우리가 알고 있는 대표적인 Servlet Container가 Tomcat 이다. 톰켓같은 was가 java파일을 컴파일해서 Class로 만들고 메모리에 올려 servlet객체를 만든다.</p>
-<p>Servlet 동작과정</p>
-<p><img src="https://i.imgur.com/alHA0zr.jpg" alt=""></p>
-<ol>
-<li>사용자가 URL을 클릭하면 HTTP Request를 Servlet Container에 보낸다.<br></li>
-<li>Servlet Container는 HttpServletRequest, HttpServletResponse 두 객체를 생성한다.<br></li>
-<li>사용자가 요청한 URL을 분석하여 어느 서블릿에 대한 요청인지 찾는다.<br></li>
-<li>컨테이너는 서블릿 service() 메소드를 호출하며, POST, GET여부에 따라 doGet() 또는 doPost()가 호출된다.<br></li>
-<li>doGet() or doPost() 메소드는 동적인 페이지를 생성한 후 HttpServletResponse객체에 응답을 보낸다.<br></li>
-<li>응답이 완료되면 HttpServletRequest, HttpServletResponse 두 객체를 소멸시킨다.<br></li>
-</ol>
-<h3><span id="서블릿-생명주기">서블릿 생명주기</span></h3>
-<p>init() - 서버가 켜질때 한번만 실행<br>
-service - 모든 유저들의 요청을들을 받는다.<br>
-destroy() - 서버가 꺼질대 한번만실행</p>
-<p><img src="http://i.imgur.com/JaIUPwx.jpg" alt=""></p>
-<h2><span id="spring-container">Spring Container</span></h2>
-<p>먼저 Spring Container를 이해하기위해서는 IOC와 DI를 이해해야한다.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">이름</th>
-<th style="text-align:left">설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">IoC(Inversion of Control)</td>
-<td style="text-align:left">개발자는 JAVA코딩시 New연산자, 인터페이스 호출,팩토리 호출방식으로 객체를 생성하고 소멸시킨다. IOC란 인스턴스의 생성부터 소멸까지의 객체 생명주기 관리를 개발자가하는 대신 스프링(컨테이너)가 관리한다</td>
-</tr>
-<tr>
-<td style="text-align:left">DI(Dependency Injection)</td>
-<td style="text-align:left">IoC를 실제로 구현하는 방법으로서 의존성있는 컴포넌트들 간의 관계를 개발자가 직접 코드로 명시하지 않고 컨테이너인 Spring이 런타임에 찾아서 연결해주게 하는 것이다.</td>
-</tr>
-</tbody>
-</table>
-<p>Spring Container는 Bean들의 생명주기를 관리한다. Spring Container는 어플리케이션을 구성하는 Bean들을 관리하기위해 IOC를 사용한다. Spring 컨테이너 종류에는 BeanFactory와 이를 상속한ApplicationContext가 존재한다. 이 두개의 컨테이너로 의존성 주입된 빈들을 제어하고 관리할 수 있다. 아래는 스프링 웹어플리케이션 동작원리이다.</p>
-<h2><span id="웹어플리케이션-동작원리">웹어플리케이션 동작원리</span></h2>
-<p><img src="https://i.imgur.com/PlDF42i.png" alt=""></p>
-<ol>
-<li>웹 애플리케이션이 실행되면 Tomcat(WAS)에 의해 web.xml이 loading된다.</li>
-<li>web.xml에 등록되어 있는 ContextLoaderListener(Java Class)가 생성된다. ContextLoaderListener 클래스는 ServletContextListener 인터페이스를 구현하고 있으며, ApplicationContext를 생성하는 역할을 수행한다.</li>
-<li>생성된 ContextLoaderListener는 root-context.xml을 loading한다.</li>
-<li>root-context.xml에 등록되어 있는 Spring Container가 구동된다. 이 때 개발자가 작성한 비즈니스 로직에 대한 부분과 DAO, VO 객체들이 생성된다.</li>
-<li>클라이언트로부터 웹 애플리케이션이 요청이 온다.</li>
-<li>DispatcherServlet(Servlet)이 생성된다. DispatcherServlet은 FrontController의 역할을 수행한다. 클라이언트로부터 요청 온 메시지를 분석하여 알맞은 PageController에게 전달하고 응답을 받아 요청에 따른 응답을 어떻게 할 지 결정만한다. 실질적은 작업은 PageController에서 이루어지기 때문이다. 이러한 클래스들을 HandlerMapping, ViewResolver 클래스라고 한다.</li>
-<li>DispatcherServlet은 servlet-context.xml을 loading 한다.</li>
-<li>두번째 Spring Container가 구동되며 응답에 맞는 PageController 들이 동작한다. 이 때 첫번째 Spring Container 가 구동되면서 생성된 DAO, VO, ServiceImpl 클래스들과 협업하여 알맞은 작업을 처리하게 된다.</li>
-</ol>
-<p>참고<br></p>
-<ul>
-<li><a href="http://anster.tistory.com/128" target="_blank" rel="noopener">Old Lisper</a><br></li>
-<li><a href="http://10albatross.tistory.com/4" target="_blank" rel="noopener">고물라디오 같은 블로그</a><br></li>
-<li><a href="http://jojoldu.tistory.com/28" target="_blank" rel="noopener">기억보단 기록을</a><br></li>
-<li><a href="http://asfirstalways.tistory.com/334" target="_blank" rel="noopener">Devlog</a><br></li>
-<li><a href="https://docs.spring.io/spring/docs/2.5.x/reference/transaction.html#transaction-declarative" target="_blank" rel="noopener">Spring Document</a><br></li>
-</ul>
+                <p>블로그 <a href="https://wan-blog.tistory.com/" target="_blank" rel="noopener">https://wan-blog.tistory.com/</a> 이전하였습니다. 블로그에 접속하셔서 오른쪽 상단에 검색을 이용해 글제목을 검색해주시면 감사하겠습니다.</p>
 
                 
 
@@ -328,7 +270,7 @@ destroy() - 서버가 꺼질대 한번만실행</p>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">서블릿 컨테이너와 스프링 컨테이너</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">서블릿 컨테이너</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">서블릿 생명주기</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Spring Container</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">웹어플리케이션 동작원리</span></a></li></ol></li></ol>
+          <ol class="nav">none</ol>
         
         </div>
       </aside>
@@ -457,7 +399,7 @@ destroy() - 서버가 꺼질대 한번만실행</p>
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Wan 2019 
+                    Copyright &copy; Wan 2020 
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">

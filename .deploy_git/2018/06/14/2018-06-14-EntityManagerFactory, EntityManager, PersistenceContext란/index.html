@@ -2,14 +2,14 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="WanBlog | 개발블로그">
-    <meta name="keyword"  content="WanBlog | 개발블로그">
-    <meta name="naver-site-verification" content="c80ae88a487472e88ec9170ad53578e81edad8b1"/>
+    <meta name="keyword" content="WanBlog | 개발블로그">
+    <meta name="naver-site-verification" content="c80ae88a487472e88ec9170ad53578e81edad8b1">
 
     <meta property="og:type" content="article">
 	  <meta property="og:title" content="Wan Blog">
@@ -158,14 +158,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -228,33 +228,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="entitymanagerfactory-entitymanager-persistencecontext란">EntityManagerFactory, EntityManager, PersistenceContext란?</span></h2>
-<h3><span id="entitymanagerfactory란">EntityManagerFactory란</span></h3>
-<p>데이터베이스를 하나만 사용하는 애플리케이션들은 일반적으로 EntityManagerFactory를 한개만 생성한다. 이 엔터티 매니저 팩토리로 엔터티 매니저를 생성할 수 있다. EntityManagerFactory는 Thread Safe해서 여러 스레드가 동시에 접근해도 안전하므로 서로 다른 스레드간에 공유해새 사용한다.</p>
-<h4><span id="entitymanagerfactory-정리">EntityManagerFactory 정리</span></h4>
-<ul>
-<li>Hibernate에서는 SessionFactory(EntityManagerFactory)</li>
-<li>엔티티 매니저 팩토리는 여러 스레드가 동시에 접근해도 안전하다.(thread-safe)</li>
-<li>EntityManager를 생성한다.</li>
-</ul>
-<h3><span id="entitymanager란">EntityManager란</span></h3>
-<p>엔터티 매니저는 엔터티를 저장하는 메모리상의 데이터베이스라고 생각하면 될 것같다. 엔터티 매니저는 엔터티를 저장하고 수정하고 삭제하고 조회하는 등 엔터티와 관련된 모든일을 한다. 하지만 위의 EntityManagerFactory는 달리 Thread Safe하지 않기때문에 동시성 문제가 발생하므로 스레드간에 절대 공유하면 안 된다. 그래서 일반적으로 EntityManager를 EntityManagerFactory를 이용하여 생성한것을 사용하는것이 아닌 스프링에서 관리하는 EntityManager를 아래와 같이 선언하여 사용한다. 이렇게되면 스프링에서 알아서 EntityManager를 Proxy로 깜싼 EntityManager를 생성 하여 주입해주기 때문에 Thread-Safety를 보장 한다.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@PersistenceContext</span></span><br><span class="line"><span class="keyword">private</span> EntityManager entityManager;</span><br></pre></td></tr></table></figure>
-<h4><span id="entitymanager-정리">EntityManager 정리</span></h4>
-<ul>
-<li>Hibernate에서는 Session(EntityManager)으로 불리운다.</li>
-<li>엔티티 매니저는 여러 스레드가 동시에 접근하면 동시성 문제가 발생하므로 스레드 간에 절대 공유하면 안된다.</li>
-</ul>
-<h3><span id="persistencecontext영속성-컨텍스트란">PersistenceContext(영속성 컨텍스트)란</span></h3>
-<ul>
-<li>영속성 컨텍스트란 엔티티(Entity)를 영구 저장 하는 환경을 말한다. 엔티티 매니저로 엔티티를 저장하거나 조회하면 엔티티 매니저는 영속성 컨텍스트에 엔티티를 보관하고 관리한다.</li>
-<li>영속성 컨텍스트는 엔티티 매니저(Session)를 생성할 때 하나 만들어진다. 그리고 엔티티 매니저(Session)를 통해서 영속성 컨텍스트에 접근할 수 있고 영속성 컨텍스트를 관리 할 수 있다.</li>
-<li>여러 엔티티 매니저(Session)가 같은 영속성 컨텍스트에 접근할 수도 있다.</li>
-</ul>
-<p>참조</p>
-<ul>
-<li><a href="http://book.naver.com/bookdb/book_detail.nhn?bid=9252528" target="_blank" rel="noopener">자바 ORM 표준 JPA 프로그래밍</a></li>
-</ul>
+                <p>블로그 <a href="https://wan-blog.tistory.com/" target="_blank" rel="noopener">https://wan-blog.tistory.com/</a> 이전하였습니다. 블로그에 접속하셔서 오른쪽 상단에 검색을 이용해 글제목을 검색해주시면 감사하겠습니다.</p>
 
                 
 
@@ -298,7 +272,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">EntityManagerFactory, EntityManager, PersistenceContext란?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">EntityManagerFactory란</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">EntityManagerFactory 정리</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">EntityManager란</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">EntityManager 정리</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">PersistenceContext(영속성 컨텍스트)란</span></a></li></ol></li></ol>
+          <ol class="nav">none</ol>
         
         </div>
       </aside>
@@ -429,7 +403,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Wan 2019 
+                    Copyright &copy; Wan 2020 
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
